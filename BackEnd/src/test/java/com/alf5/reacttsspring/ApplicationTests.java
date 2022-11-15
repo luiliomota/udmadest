@@ -1,4 +1,4 @@
-package com.alf5.spring;
+package com.alf5.reacttsspring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

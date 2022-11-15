@@ -1,4 +1,4 @@
-package com.alf5.spring;
+package com.alf5.reacttsspring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
