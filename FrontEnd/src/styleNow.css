@@ -1,0 +1,5 @@
+.imagem_de_fundo_login{
+    position: relative;
+    background-size: cover;
+    background-image: url("./assets/images/fundoLogin.png");
+}
