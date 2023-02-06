@@ -56,6 +56,7 @@ const Register = () => {
                       autoComplete="new-password"
                     />
                   </CInputGroup>
+                  {/*teste commit*/}
                   <div className="d-grid">
                     <CButton color="secondary">Criar conta</CButton>
                   </div>
