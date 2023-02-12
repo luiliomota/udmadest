@@ -41,7 +41,7 @@ const AppBreadcrumb = () => {
             key={index}
           >
             {breadcrumb.name}
-          </CBreadcrumbItem>
+      </CBreadcrumbItem>
         )
       })}
     </CBreadcrumb>

@@ -1,43 +1,6 @@
 .imagem_de_fundo_login {
+
     position: relative;
     background-size: cover;
     background-image: url("./assets/images/fundoLogin.png");
-}
-.imagem_de_fundo_mensagem {
-    position: relative;
-    background-size: cover;
-    background-image: url("./assets/images/fundoMensagem.png");
-}
-.imagem_de_fundo_home {
-    position: relative;
-    background-size: cover;
-    background-color: black;
-    background-image: url("./assets/images/fundoHome.png");
-}
-.imagem_de_fundo_home2 {
-    position: relative;
-    background-size: cover;
-    background-color: black;
-    background-image: url("./assets/images/fundoHome2.png");
-}
-.texto1_home {
-    font-family: "monospace";
-    color: white;
-    font-style: oblique;
-    line-height: 1.8;
-}
-
-.texto2_home {
-    font-family: "Poppins ExtraBold";
-    font-style: oblique;
-    /*text-decoration: underline;*/
-    color: black!important;
-    font-size: 15px;
-}
-.laptop_fundo {
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url("./assets/images/laptop.png");
 }
