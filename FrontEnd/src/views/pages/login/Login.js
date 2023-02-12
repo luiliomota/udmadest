@@ -15,7 +15,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import imgLogo from '../../../assets/images/logo2b.png'
+import imgLogo from '../../../assets/images/logo.png'
 import '../../../styleNow.css'
 
 const Login = () => {
