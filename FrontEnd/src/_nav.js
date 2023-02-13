@@ -1,24 +1,13 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import {
-  cilAccountLogout,
-  cilBell, cilCalculator,
-  cilChartPie,
-  cilCursor, cilDescription,
-  cilDrop, cilHome, cilMoney,
-  cilNotes,
-  cilPencil,
-  cilPuzzle,
-  cilSpeedometer,
-  cilStar,
-} from '@coreui/icons'
-import {CNavGroup, CNavItem, CNavTitle} from '@coreui/react'
+import {cilAccountLogout, cilHome, cilMoney, cilNotes, cilPencil,} from '@coreui/icons'
+import {CNavGroup, CNavItem} from '@coreui/react'
 
 const _nav = [
   {
     component: CNavItem,
     name: 'INICIO',
-    to: '/dashboard',
+    to: '/painel',
     icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },
   {
@@ -42,8 +31,8 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Carnê / Oferta',
-        to: '/cadastro/congregacao',
+        name: 'Contribuição',
+        to: '/lancamento/contribuicao',
       },
     ],
   },

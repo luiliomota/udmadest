@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
+const Painel = React.lazy(() => import('./views/dashboard/Painel'))
+const Congregacao = React.lazy(() => import('./views/dashboard/Congregacao'))
+const NovaCongregacao = React.lazy(() => import('./views/dashboard/Congregacao/Novo'))
+const Contribuicao = React.lazy(() => import('./views/dashboard/Contribuicao'))
+const NovaContribuicao = React.lazy(() => import('./views/dashboard/Contribuicao/Novo'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
@@ -52,7 +56,11 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
-  { path: '/dashboard', name: 'Dashboard', element: Dashboard },
+  { path: '/painel', name: 'Painel', element: Painel },
+  { path: '/cadastro/congregacao', name: 'Congregacao', element: Congregacao },
+  { path: '/cadastro/congregacao/novo', name: 'NovaCongregacao', element: NovaCongregacao },
+  { path: '/lancamento/contribuicao', name: 'Contribuicao', element: Contribuicao },
+  { path: '/lancamento/contribuicao/novo', name: 'NovaContribuicao', element: NovaContribuicao },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },

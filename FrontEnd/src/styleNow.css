@@ -1,6 +1,19 @@
 .imagem_de_fundo_login {
-
     position: relative;
+    background-color: rgb(157,157,157,40%);
     background-size: cover;
     background-image: url("./assets/images/fundoLogin.png");
+}
+.logo_udmadest {
+    position: relative;
+    background-size: contain;
+    background-color: rgb(157,157,157,60%);
+    background-image: url("./assets/images/logo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.form-text {
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: unset!important;
 }
