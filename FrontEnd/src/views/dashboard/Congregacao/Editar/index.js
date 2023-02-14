@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {
     CButton,
@@ -14,17 +14,28 @@ import {
 } from '@coreui/react'
 import api from "../../../../components/Api";
 import "../../../../styleNow.css";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
-const NovaCongregacao = () => {
+const EditarCongregacao = () => {
+    const {id} = useParams();
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
   const navivate = useNavigate();
   const [congregacao, setCongregacao] = useState({
       nome: "",
   });
 
-  function cadastrar() {
-    api.post("/api/congregacao",congregacao)
+  useEffect(() => {
+      api.get(`/api/congregacao/${id}`)
+          .then((response) => {
+              if(response.status == 200 && congregacao.dataCadastro === undefined){
+                  setCongregacao(response.data)
+              }
+          })
+          .catch((error) => console.error(error))
+  })
+
+  function gravar() {
+    api.put((`/api/congregacao/${id}`),congregacao)
         .then((response) => {
             console.table(response);
             navivate('/cadastro/congregacao');
@@ -56,9 +67,9 @@ const NovaCongregacao = () => {
                         <CCard style={{border: "none",background: "transparent"}}>
                             <CButton
                                 style={{borderColor: "unset",color: "black",backgroundColor: "rgba(150,150,150,100%)"}}
-                                onClick={cadastrar}
+                                onClick={gravar}
                             >
-                                Salvar
+                                Gravar
                             </CButton>
                         </CCard>
                     </CCardBody>
@@ -68,4 +79,4 @@ const NovaCongregacao = () => {
   )
 }
 
-export default NovaCongregacao
+export default EditarCongregacao

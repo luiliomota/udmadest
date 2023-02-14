@@ -2,6 +2,7 @@ package com.alf5.udmadest.controller;
 
 import com.alf5.udmadest.controller.dto.CongregacaoDto;
 import com.alf5.udmadest.controller.form.CongregacaoForm;
+import com.alf5.udmadest.controller.form.EditarCongregacao;
 import com.alf5.udmadest.model.Congregacao;
 import com.alf5.udmadest.repository.CongregacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -23,7 +25,7 @@ public class CongregacaoController {
 
     //Criar Congregação
     @PostMapping
-    public ResponseEntity<CongregacaoDto> criarCongregacao(@RequestBody CongregacaoForm form, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<CongregacaoDto> criarCongregacao(@RequestBody @Valid CongregacaoForm form, UriComponentsBuilder uriComponentsBuilder) {
         Congregacao congregacao = form.criar();
         congregacaoRepository.save(congregacao);
         URI uri = uriComponentsBuilder.path("/api/congregacao/{id}").buildAndExpand(congregacao.getId()).toUri();
@@ -54,6 +56,17 @@ public class CongregacaoController {
         if(congregacaoRepository.existsById(id)){
             congregacaoRepository.deleteById(id);
             return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    //Editar congregação por id
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<CongregacaoDto> editarCongregacao(@PathVariable Long id, @RequestBody @Valid EditarCongregacao form) {
+        if(congregacaoRepository.existsById(id)){
+            Congregacao congregacao = form.editar(id, congregacaoRepository);
+            return ResponseEntity.ok(new CongregacaoDto(congregacao));
         }
         return ResponseEntity.notFound().build();
     }

@@ -16,7 +16,7 @@ public class ContribuicaoForm {
     private String oferta;
 
     public Contribuicao registrar(CongregacaoRepository congregacaoRepository) {
-        if(congregacaoRepository.existsById(this.idCongregacao)){
+            if(congregacaoRepository.existsById(this.idCongregacao)){
             Contribuicao contribuicao = new Contribuicao();
             Congregacao congregacao = congregacaoRepository.getReferenceById(this.idCongregacao);
             contribuicao.setCongregacao(congregacao);

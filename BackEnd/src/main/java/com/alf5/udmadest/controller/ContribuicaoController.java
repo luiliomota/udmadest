@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -26,7 +27,7 @@ public class ContribuicaoController {
 
     //Registrar Contribuição
     @PostMapping
-    public ResponseEntity<ContribuicaoDto> registrarContribuicao(@RequestBody ContribuicaoForm form, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<ContribuicaoDto> registrarContribuicao(@RequestBody @Valid ContribuicaoForm form, UriComponentsBuilder uriComponentsBuilder) {
         Contribuicao contribuicao = form.registrar(congregacaoRepository);
         if(contribuicao != null){
             contribuicaoRepository.save(contribuicao);

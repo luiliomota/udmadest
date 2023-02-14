@@ -1,35 +1,21 @@
 import React, {useEffect, useState} from 'react'
 
-import {
-    CButton,
-    CCard,
-    CCardBody,
-    CCol,
-    CFormInput,
-    CRow,
-    CTable, CTableBody, CTableDataCell,
-    CTableHead,
-    CTableHeaderCell,
-    CTableRow,
-} from '@coreui/react'
+import {CButton, CCard, CCardBody, CCol, CFormInput, CRow, CTableBody, CTableDataCell,} from '@coreui/react'
 import api from "../../../../components/Api";
 import "../../../../styleNow.css";
-import {Autocomplete, IconButton, TextField} from "@mui/material";
-import {Delete, Edit} from "@mui/icons-material";
+import {Autocomplete, TextField} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 const NovaContribuicao = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-
+  const navigate = useNavigate();
   const varCol = {
       'textAlign': "-webkit-center",
   }
-
   const [congregacao, setCongregacao] = useState({
       nome: "",
   });
-
   const [listaCongregacoes, setListaCongregacoes] = useState([]);
-
   const [contribuicao, setContribuicao] = useState({
       idCongregacao: "",
       dataContribuicao: "",
@@ -49,22 +35,11 @@ const NovaContribuicao = () => {
     api.post("/api/contribuicao",contribuicao)
         .then((response) => {
             console.table(response);
-            resetContribuicao();
-            resetCongregacao();
+            navigate('/lancamento/contribuicao');
         })
         .catch((error) => console.error(error))
   }
 
-  console.log(listaCongregacoes);
-    console.log(contribuicao);
-  function resetContribuicao () {
-      setContribuicao({
-          idCongregacao: "",
-          dataContribuicao: "",
-          carne: "",
-          oferta: "",
-      })
-  }
   function resetCongregacao () {
       setCongregacao({
           nome: "",

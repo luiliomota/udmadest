@@ -1,28 +1,26 @@
 import React, {useEffect, useState} from 'react'
 
 import {
-  CButton,
-  CCard,
-  CCardBody, CCardLink,
-  CCol, CFormTextarea, CLink, CNavLink,
-  CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
+    CButton,
+    CCard,
+    CCardBody,
+    CCol,
+    CRow,
+    CTable,
+    CTableBody,
+    CTableDataCell,
+    CTableHead,
+    CTableHeaderCell,
+    CTableRow,
 } from '@coreui/react'
 import api from "../../../components/Api";
-import {Link} from "react-router-dom";
-import CIcon from "@coreui/icons-react";
-import {cilDelete} from "@coreui/icons";
+import {Link, useNavigate} from "react-router-dom";
 import {Delete, Edit} from "@mui/icons-material";
 import {IconButton} from "@mui/material";
 
 const Congregacao = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
-
+const navigate = useNavigate();
   const [tabela, setTabela] = useState([
       {
         nome: "",
@@ -88,7 +86,7 @@ const Congregacao = () => {
                         <div>{item.dataCadastro}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <IconButton >
+                        <IconButton onClick={() => navigate(`/cadastro/congregacao/editar/${item.id}`)}>
                           <Edit fontSize="medium" />
                         </IconButton>
                         <IconButton onClick={() => deleteCongregacao(item.id)}>

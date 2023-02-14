@@ -3,6 +3,7 @@ import React from 'react'
 const Painel = React.lazy(() => import('./views/dashboard/Painel'))
 const Congregacao = React.lazy(() => import('./views/dashboard/Congregacao'))
 const NovaCongregacao = React.lazy(() => import('./views/dashboard/Congregacao/Novo'))
+const EditarCongregacao = React.lazy(() => import('./views/dashboard/Congregacao/Editar'))
 const Contribuicao = React.lazy(() => import('./views/dashboard/Contribuicao'))
 const NovaContribuicao = React.lazy(() => import('./views/dashboard/Contribuicao/Novo'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
@@ -59,6 +60,7 @@ const routes = [
   { path: '/painel', name: 'Painel', element: Painel },
   { path: '/cadastro/congregacao', name: 'Congregacao', element: Congregacao },
   { path: '/cadastro/congregacao/novo', name: 'NovaCongregacao', element: NovaCongregacao },
+  { path: '/cadastro/congregacao/editar/:id', name: 'EditarCongregacao', element: EditarCongregacao },
   { path: '/lancamento/contribuicao', name: 'Contribuicao', element: Contribuicao },
   { path: '/lancamento/contribuicao/novo', name: 'NovaContribuicao', element: NovaContribuicao },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
