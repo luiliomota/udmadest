@@ -13,7 +13,7 @@ import {
     CTableHeaderCell,
     CTableRow,
 } from '@coreui/react'
-import api from "../../../components/Api";
+import api from "../../../Api";
 import {Link, useNavigate} from "react-router-dom";
 import {Delete, Edit} from "@mui/icons-material";
 import {IconButton} from "@mui/material";

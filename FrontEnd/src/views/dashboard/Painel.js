@@ -88,6 +88,13 @@ const Painel = (withCharts) => {
                     Relatório
                   </CCardTitle>
                   <CRow>
+                    <CCol sm={12} lg={12}>
+                      <CCard className="mb-1">
+                        <Link style={varLink} to="/lancamento/contribuicao/relatorio">
+                          Geral
+                        </Link>
+                      </CCard>
+                    </CCol>
                     <CCol sm={12} lg={6}>
                       <CCard className="mb-1">
                         <Link style={varLink} to="/relatorio/anual">

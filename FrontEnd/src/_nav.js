@@ -48,6 +48,11 @@ const _nav = [
     items: [
       {
         component: CNavItem,
+        name: 'Geral',
+        to: '/lancamento/contribuicao/relatorio',
+      },
+      {
+        component: CNavItem,
         name: 'Anual',
         to: '/relatorio/anual',
       },

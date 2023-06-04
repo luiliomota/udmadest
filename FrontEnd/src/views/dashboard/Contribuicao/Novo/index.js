@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import {CButton, CCard, CCardBody, CCol, CFormInput, CRow, CTableBody, CTableDataCell,} from '@coreui/react'
-import api from "../../../../components/Api";
+import api from "../../../../Api";
 import "../../../../styleNow.css";
 import {Autocomplete, TextField} from "@mui/material";
 import {useNavigate} from "react-router-dom";

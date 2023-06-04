@@ -12,7 +12,7 @@ import {
     CTableHeaderCell,
     CTableRow,
 } from '@coreui/react'
-import api from "../../../../components/Api";
+import api from "../../../../Api";
 import "../../../../styleNow.css";
 import {useNavigate} from "react-router-dom";
 

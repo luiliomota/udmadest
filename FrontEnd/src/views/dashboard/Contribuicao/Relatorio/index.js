@@ -1,7 +1,4 @@
-import React, {useEffect, useState} from 'react'
-
 import {
-  CButton,
   CCard,
   CCardBody,
   CCol,
@@ -13,12 +10,12 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
-import {Link, useNavigate} from "react-router-dom";
-import {IconButton} from "@mui/material";
-import {Delete, Edit} from "@mui/icons-material";
-import api from "../../../Api";
 
-const PainelContribuicao = () => {
+import React, {useEffect, useState} from 'react'
+import {useNavigate} from "react-router-dom";
+import api from "../../../../Api";
+
+const RelatorioContribuicao = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
   const navigate = useNavigate();
   const [tabela, setTabela] = useState([
@@ -40,14 +37,6 @@ const PainelContribuicao = () => {
         .catch((error) => console.error(error));
   },[]);
 
-  function deleteContribuicao(id) {
-    api.delete(`/api/contribuicao/${id}`)
-        .then((response) => {
-          console.log(response.status);
-          atualizarTabela();
-        })
-  }
-
   function atualizarTabela() {
     api.get("/api/contribuicao")
         .then((response) => {
@@ -58,13 +47,6 @@ const PainelContribuicao = () => {
   return (
     <>
       <CRow>
-        <CCol md={6}>
-          <CButton className="mb-0 border-dark" color="light">
-            <Link className="text-decoration-none" to="/lancamento/contribuicao/novo">
-              Novo
-            </Link>
-          </CButton>
-        </CCol>
       </CRow>
       <br/>
       <CRow>
@@ -79,7 +61,6 @@ const PainelContribuicao = () => {
                     <CTableHeaderCell>Carnê</CTableHeaderCell>
                     <CTableHeaderCell>Oferta</CTableHeaderCell>
                     <CTableHeaderCell>Total</CTableHeaderCell>
-                    <CTableHeaderCell>Alterar</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -100,14 +81,6 @@ const PainelContribuicao = () => {
                       <CTableDataCell style={{fontWeight: "bold"}}>
                         <div>{"R$ "+(item.carne + item.oferta)}</div>
                       </CTableDataCell>
-                      <CTableDataCell>
-                        <IconButton onClick={() => navigate(`/lancamento/contribuicao/editar/${item.id}`)}>
-                          <Edit fontSize="medium" />
-                        </IconButton>
-                        <IconButton onClick={() => deleteContribuicao(item.id)}>
-                          <Delete fontSize="medium" />
-                        </IconButton>
-                      </CTableDataCell>
                     </CTableRow>
                   ))}
                 </CTableBody>
@@ -120,4 +93,4 @@ const PainelContribuicao = () => {
   )
 }
 
-export default PainelContribuicao
+export default RelatorioContribuicao
