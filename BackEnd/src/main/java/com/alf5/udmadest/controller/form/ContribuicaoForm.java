@@ -6,21 +6,19 @@ import com.alf5.udmadest.repository.CongregacaoRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class ContribuicaoForm {
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Long idCongregacao;
-    private String dataContribuicao;
+    private LocalDate dataContribuicao;
     private String carne;
     private String oferta;
 
     public Contribuicao registrar(CongregacaoRepository congregacaoRepository) {
-            if(congregacaoRepository.existsById(this.idCongregacao)){
+            if(congregacaoRepository.existsById(this.idCongregacao)) {
             Contribuicao contribuicao = new Contribuicao();
             Congregacao congregacao = congregacaoRepository.getReferenceById(this.idCongregacao);
             contribuicao.setCongregacao(congregacao);
-            contribuicao.setDataContribuicao(LocalDate.parse(this.dataContribuicao, formatter));
+            contribuicao.setDataContribuicao(this.dataContribuicao);
             contribuicao.setCarne(new BigDecimal(this.carne));
             contribuicao.setOferta(new BigDecimal(this.oferta));
             return contribuicao;
@@ -32,7 +30,7 @@ public class ContribuicaoForm {
         return idCongregacao;
     }
 
-    public String getDataContribuicao() {
+    public LocalDate getDataContribuicao() {
         return dataContribuicao;
     }
 

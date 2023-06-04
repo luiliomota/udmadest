@@ -13,18 +13,18 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {IconButton} from "@mui/material";
 import {Delete, Edit} from "@mui/icons-material";
 import api from "../../../components/Api";
 
 const PainelContribuicao = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
-
+  const navigate = useNavigate();
   const [tabela, setTabela] = useState([
       {
         nomeCongregacao: "",
-        dataContribuicao: "",
+        dataContribuicaoString: "",
         carne: "",
         oferta: "",
         total: "",
@@ -89,7 +89,7 @@ const PainelContribuicao = () => {
                         <div>{item.nomeCongregacao}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>{item.dataContribuicao}</div>
+                        <div>{item.dataContribuicaoString}</div>
                       </CTableDataCell>
                       <CTableDataCell>
                         <div>{"R$ "+item.carne}</div>
@@ -101,7 +101,7 @@ const PainelContribuicao = () => {
                         <div>{"R$ "+(item.carne + item.oferta)}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <IconButton >
+                        <IconButton onClick={() => navigate(`/lancamento/contribuicao/editar/${item.id}`)}>
                           <Edit fontSize="medium" />
                         </IconButton>
                         <IconButton onClick={() => deleteContribuicao(item.id)}>

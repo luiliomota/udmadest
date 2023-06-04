@@ -19,8 +19,8 @@ const NovaContribuicao = () => {
   const [contribuicao, setContribuicao] = useState({
       idCongregacao: "",
       dataContribuicao: "",
-      carne: "",
-      oferta: "",
+      carne: 0,
+      oferta: 0,
   });
 
     useEffect(() => {
@@ -78,7 +78,7 @@ const NovaContribuicao = () => {
                                     <CCol style={varCol} className="mb-1" sm={12} lg={3}>
                                         <CTableDataCell>
                                             <CFormInput
-                                                type="text"
+                                                type="date"
                                                 label="Data"
                                                 value={contribuicao.dataContribuicao}
                                                 onChange={(e) => {

@@ -1,7 +1,11 @@
 package com.alf5.udmadest.controller;
 
+import com.alf5.udmadest.controller.dto.CongregacaoDto;
 import com.alf5.udmadest.controller.dto.ContribuicaoDto;
 import com.alf5.udmadest.controller.form.ContribuicaoForm;
+import com.alf5.udmadest.controller.form.EditarCongregacao;
+import com.alf5.udmadest.controller.form.EditarContribuicao;
+import com.alf5.udmadest.model.Congregacao;
 import com.alf5.udmadest.model.Contribuicao;
 import com.alf5.udmadest.repository.CongregacaoRepository;
 import com.alf5.udmadest.repository.ContribuicaoRepository;
@@ -61,6 +65,17 @@ public class ContribuicaoController {
         if(contribuicaoRepository.existsById(id)){
             contribuicaoRepository.deleteById(id);
             return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    //Editar contribuicao por id
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<ContribuicaoDto> editarContribuicao(@PathVariable Long id, @RequestBody @Valid EditarContribuicao form) {
+        if(contribuicaoRepository.existsById(id)){
+            Contribuicao contribuicao = form.editar(id, contribuicaoRepository, congregacaoRepository);
+            return ResponseEntity.ok(new ContribuicaoDto(contribuicao));
         }
         return ResponseEntity.notFound().build();
     }

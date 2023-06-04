@@ -4,23 +4,28 @@ import com.alf5.udmadest.model.Contribuicao;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class ContribuicaoDto {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Long id;
-    private String dataRegistro;
-    private String dataContribuicao;
+    private Long idCongregacao;
+    private LocalDate dataRegistro;
+    private LocalDate dataContribuicaoDate;
+    private String dataContribuicaoString;
     private String nomeCongregacao;
     private BigDecimal carne;
     private BigDecimal oferta;
 
     public ContribuicaoDto(Contribuicao contribuicao) {
         this.id = contribuicao.getId();
-        this.dataRegistro = contribuicao.getDataRegistro().format(formatter);
+        this.dataRegistro = contribuicao.getDataRegistro();
         if(contribuicao.getDataContribuicao() != null){
-            this.dataContribuicao = contribuicao.getDataContribuicao().format(formatter);
+            this.dataContribuicaoString = contribuicao.getDataContribuicao().format(formatter);
+            this.dataContribuicaoDate = contribuicao.getDataContribuicao();
         }
+        this.idCongregacao = contribuicao.getCongregacao().getId();
         this.nomeCongregacao = contribuicao.getCongregacao().getNome();
         this.carne = contribuicao.getCarne();
         this.oferta = contribuicao.getOferta();
@@ -38,20 +43,28 @@ public class ContribuicaoDto {
         this.id = id;
     }
 
-    public String getDataContribuicao() {
-        return dataContribuicao;
+    public LocalDate getDataContribuicaoDate() {
+        return dataContribuicaoDate;
     }
 
-    public void setDataContribuicao(String dataContribuicao) {
-        this.dataContribuicao = dataContribuicao;
+    public void setDataContribuicaoDate(LocalDate dataContribuicaoDate) {
+        this.dataContribuicaoDate = dataContribuicaoDate;
     }
 
-    public String getDataRegistro() {
+    public String getDataContribuicaoString() {
+        return dataContribuicaoString;
+    }
+
+    public void setDataContribuicaoString(String dataContribuicaoString) {
+        this.dataContribuicaoString = dataContribuicaoString;
+    }
+
+    public LocalDate getDataRegistro() {
         return dataRegistro;
 
     }
 
-    public void setDataRegistro(String dataRegistro) {
+    public void setDataRegistro(LocalDate dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 
@@ -77,5 +90,13 @@ public class ContribuicaoDto {
 
     public void setOferta(BigDecimal oferta) {
         this.oferta = oferta;
+    }
+
+    public Long getIdCongregacao() {
+        return idCongregacao;
+    }
+
+    public void setIdCongregacao(Long idCongregacao) {
+        this.idCongregacao = idCongregacao;
     }
 }

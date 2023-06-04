@@ -6,6 +6,7 @@ const NovaCongregacao = React.lazy(() => import('./views/dashboard/Congregacao/N
 const EditarCongregacao = React.lazy(() => import('./views/dashboard/Congregacao/Editar'))
 const Contribuicao = React.lazy(() => import('./views/dashboard/Contribuicao'))
 const NovaContribuicao = React.lazy(() => import('./views/dashboard/Contribuicao/Novo'))
+const EditarContribuicao = React.lazy(() => import('./views/dashboard/Contribuicao/Editar'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
@@ -63,6 +64,7 @@ const routes = [
   { path: '/cadastro/congregacao/editar/:id', name: 'EditarCongregacao', element: EditarCongregacao },
   { path: '/lancamento/contribuicao', name: 'Contribuicao', element: Contribuicao },
   { path: '/lancamento/contribuicao/novo', name: 'NovaContribuicao', element: NovaContribuicao },
+  { path: '/lancamento/contribuicao/editar/:id', name: 'EditarContribuicao', element: EditarContribuicao },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
