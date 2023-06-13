@@ -34,6 +34,11 @@ const _nav = [
         name: 'Contribuição',
         to: '/lancamento/contribuicao',
       },
+      {
+        component: CNavItem,
+        name: 'Saida',
+        to: '/lancamento/saida',
+      },
     ],
   },
   // {
@@ -46,6 +51,11 @@ const _nav = [
     to: '/relatorio',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
     items: [
+      {
+        component: CNavItem,
+        name: 'Saida',
+        to: '/lancamento/saida/relatorio',
+      },
       {
         component: CNavItem,
         name: 'Geral',
