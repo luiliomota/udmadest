@@ -39,6 +39,11 @@ const _nav = [
         name: 'Saida',
         to: '/lancamento/saida',
       },
+      {
+        component: CNavItem,
+        name: 'Considerações',
+        to: '/lancamento/consideracao',
+      },
     ],
   },
   // {
@@ -53,6 +58,11 @@ const _nav = [
     items: [
       {
         component: CNavItem,
+        name: 'Contribuição',
+        to: '/lancamento/contribuicao/relatorio',
+      },
+      {
+        component: CNavItem,
         name: 'Saida',
         to: '/lancamento/saida/relatorio',
       },
@@ -60,16 +70,6 @@ const _nav = [
         component: CNavItem,
         name: 'Geral',
         to: '/lancamento/contribuicao/relatorio',
-      },
-      {
-        component: CNavItem,
-        name: 'Anual',
-        to: '/relatorio/anual',
-      },
-      {
-        component: CNavItem,
-        name: 'Mensal',
-        to: '/relatorio/mensal',
       },
     ],
   },

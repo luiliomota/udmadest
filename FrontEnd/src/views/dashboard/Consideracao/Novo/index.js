@@ -5,23 +5,22 @@ import api from "../../../../Api";
 import "../../../../styleNow.css";
 import {useNavigate} from "react-router-dom";
 
-const NovaSaida = () => {
+const NovaConsideracao = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
   const navigate = useNavigate();
   const varCol = {
       'textAlign': "-webkit-center",
   }
-  const [saida, setSaida] = useState({
+  const [consideracao, setConsideracao] = useState({
       descricao: "",
-      dataSaida: "",
-      valor: 0,
+      mesReferencia: "",
   });
 
     function cadastrar() {
-    api.post("/api/saida",saida)
+    api.post("/api/consideracao",consideracao)
         .then((response) => {
             console.table(response);
-            navigate('/lancamento/saida');
+            navigate('/lancamento/consideracao');
         })
         .catch((error) => console.error(error))
   }
@@ -37,9 +36,9 @@ const NovaSaida = () => {
                                             <CFormInput
                                                 type="text"
                                                 label="Descrição"
-                                                value={saida.descricao}
+                                                value={consideracao.descricao}
                                                 onChange={(e) => {
-                                                    setSaida({...saida, descricao: e.target.value})
+                                                    setConsideracao({...consideracao, descricao: e.target.value})
                                                 }
                                                 }
                                             />
@@ -50,22 +49,9 @@ const NovaSaida = () => {
                                             <CFormInput
                                                 type="date"
                                                 label="Data"
-                                                value={saida.dataSaida}
+                                                value={consideracao.mesReferencia}
                                                 onChange={(e) => {
-                                                    setSaida({...saida, dataSaida: e.target.value})
-                                                }
-                                                }
-                                            />
-                                        </CTableDataCell>
-                                    </CCol>
-                                    <CCol style={varCol} className="mb-1" sm={12} lg={3}>
-                                        <CTableDataCell>
-                                            <CFormInput
-                                                label="Valor"
-                                                type="text"
-                                                value={saida.valor}
-                                                onChange={(e) => {
-                                                    setSaida({...saida, valor: e.target.value})
+                                                    setConsideracao({...consideracao, mesReferencia: e.target.value})
                                                 }
                                                 }
                                             />
@@ -87,4 +73,4 @@ const NovaSaida = () => {
   )
 }
 
-export default NovaSaida
+export default NovaConsideracao

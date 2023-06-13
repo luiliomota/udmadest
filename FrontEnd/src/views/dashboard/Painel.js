@@ -78,9 +78,14 @@ const Painel = (withCharts) => {
                       Contribuição
                     </Link>
                   </CCard>
-                  <CCard>
+                  <CCard className="mb-1">
                     <Link style={varLink} to="/lancamento/saida">
                       Saida
+                    </Link>
+                  </CCard>
+                  <CCard>
+                    <Link style={varLink} to="/lancamento/consideracao">
+                      Considerações
                     </Link>
                   </CCard>
                 </CCardBody>
@@ -92,29 +97,21 @@ const Painel = (withCharts) => {
                   <CCardTitle style={varTitle} >
                     Relatório
                   </CCardTitle>
-                  <CRow>
-                    <CCol sm={12} lg={12}>
-                      <CCard className="mb-1">
-                        <Link style={varLink} to="/lancamento/contribuicao/relatorio">
-                          Geral
-                        </Link>
-                      </CCard>
-                    </CCol>
-                    <CCol sm={12} lg={6}>
-                      <CCard className="mb-1">
-                        <Link style={varLink} to="/relatorio/anual">
-                          Anual
-                        </Link>
-                      </CCard>
-                    </CCol>
-                    <CCol sm={12} lg={6}>
-                      <CCard>
-                        <Link style={varLink} to="/relatorio/mensal">
-                          Mensal
-                        </Link>
-                      </CCard>
-                    </CCol>
-                  </CRow>
+                  <CCard className="mb-1">
+                    <Link style={varLink} to="/lancamento/contribuicao/relatorio">
+                      Contribuição
+                    </Link>
+                  </CCard>
+                  <CCard className="mb-1">
+                    <Link style={varLink} to="/lancamento/saida/relatorio">
+                      Saida
+                    </Link>
+                  </CCard>
+                  <CCard>
+                    <Link style={varLink} to="/lancamento/contribuicao/relatorio">
+                      Geral
+                    </Link>
+                  </CCard>
                 </CCardBody>
               </CCard>
             </CCol>
