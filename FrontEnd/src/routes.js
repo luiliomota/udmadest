@@ -4,6 +4,9 @@ const Painel = React.lazy(() => import('./views/dashboard/Painel'))
 const Congregacao = React.lazy(() => import('./views/dashboard/Congregacao'))
 const NovaCongregacao = React.lazy(() => import('./views/dashboard/Congregacao/Novo'))
 const EditarCongregacao = React.lazy(() => import('./views/dashboard/Congregacao/Editar'))
+const Diretoria = React.lazy(() => import('./views/dashboard/Diretoria'))
+const NovaDiretoria = React.lazy(() => import('./views/dashboard/Diretoria/Novo'))
+const EditarDiretoria = React.lazy(() => import('./views/dashboard/Diretoria/Editar'))
 const Contribuicao = React.lazy(() => import('./views/dashboard/Contribuicao'))
 const NovaContribuicao = React.lazy(() => import('./views/dashboard/Contribuicao/Novo'))
 const EditarContribuicao = React.lazy(() => import('./views/dashboard/Contribuicao/Editar'))
@@ -72,6 +75,9 @@ const routes = [
   { path: '/cadastro/congregacao', name: 'Congregacao', element: Congregacao },
   { path: '/cadastro/congregacao/novo', name: 'NovaCongregacao', element: NovaCongregacao },
   { path: '/cadastro/congregacao/editar/:id', name: 'EditarCongregacao', element: EditarCongregacao },
+  { path: '/cadastro/diretoria', name: 'Diretoria', element: Diretoria },
+  { path: '/cadastro/diretoria/novo', name: 'NovaDiretoria', element: NovaDiretoria },
+  { path: '/cadastro/diretoria/editar/:id', name: 'EditarDiretoria', element: EditarDiretoria },
   { path: '/lancamento/contribuicao', name: 'Contribuicao', element: Contribuicao },
   { path: '/lancamento/contribuicao/novo', name: 'NovaContribuicao', element: NovaContribuicao },
   { path: '/lancamento/contribuicao/editar/:id', name: 'EditarContribuicao', element: EditarContribuicao },

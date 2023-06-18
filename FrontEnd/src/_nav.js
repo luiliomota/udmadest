@@ -21,6 +21,11 @@ const _nav = [
         name: 'Congregação',
         to: '/cadastro/congregacao',
       },
+      {
+        component: CNavItem,
+        name: 'Diretoria',
+        to: '/cadastro/diretoria',
+      },
     ],
   },
   {
