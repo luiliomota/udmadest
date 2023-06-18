@@ -59,17 +59,17 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Contribuição',
-        to: '/lancamento/contribuicao/relatorio',
+        to: '/relatorio/contribuicao',
       },
       {
         component: CNavItem,
         name: 'Saida',
-        to: '/lancamento/saida/relatorio',
+        to: '/relatorio/saida',
       },
       {
         component: CNavItem,
         name: 'Geral',
-        to: '/lancamento/contribuicao/relatorio',
+        to: '/relatorio/geral',
       },
     ],
   },

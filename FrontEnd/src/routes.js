@@ -16,6 +16,7 @@ const Consideracao = React.lazy(() => import('./views/dashboard/Consideracao'))
 const NovaConsideracao = React.lazy(() => import('./views/dashboard/Consideracao/Novo'))
 const EditarConsideracao = React.lazy(() => import('./views/dashboard/Consideracao/Editar'))
 const RelatorioConsideracao = React.lazy(() => import('./views/dashboard/Consideracao/Relatorio'))
+const RelatorioGeral = React.lazy(() => import('./views/dashboard/RelatorioGeral'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
@@ -74,15 +75,16 @@ const routes = [
   { path: '/lancamento/contribuicao', name: 'Contribuicao', element: Contribuicao },
   { path: '/lancamento/contribuicao/novo', name: 'NovaContribuicao', element: NovaContribuicao },
   { path: '/lancamento/contribuicao/editar/:id', name: 'EditarContribuicao', element: EditarContribuicao },
-  { path: '/lancamento/contribuicao/relatorio', name: 'RelatorioContribuicao', element: RelatorioContribuicao },
+  { path: '/relatorio/contribuicao', name: 'RelatorioContribuicao', element: RelatorioContribuicao },
   { path: '/lancamento/saida', name: 'Saida', element: Saida },
   { path: '/lancamento/saida/novo', name: 'NovaSaida', element: NovaSaida },
   { path: '/lancamento/saida/editar/:id', name: 'EditarSaida', element: EditarSaida },
-  { path: '/lancamento/saida/relatorio', name: 'RelatorioSaida', element: RelatorioSaida },
+  { path: '/relatorio/saida', name: 'RelatorioSaida', element: RelatorioSaida },
   { path: '/lancamento/consideracao', name: 'Consideracao', element: Consideracao },
   { path: '/lancamento/consideracao/novo', name: 'NovaConsideracao', element: NovaConsideracao },
   { path: '/lancamento/consideracao/editar/:id', name: 'EditarConsideracao', element: EditarConsideracao },
-  { path: '/lancamento/consideracao/relatorio', name: 'RelatorioConsideracao', element: RelatorioConsideracao },
+  { path: '/relatorio/consideracao', name: 'RelatorioConsideracao', element: RelatorioConsideracao },
+  { path: '/relatorio/geral', name: 'RelatorioGeral', element: RelatorioGeral },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },

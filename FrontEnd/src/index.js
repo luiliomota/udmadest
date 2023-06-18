@@ -6,9 +6,11 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import store from './store'
+import Favicon from 'react-favicon'
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
+      <Favicon url='/favicon.webp'/>
     <App />
   </Provider>,
 )

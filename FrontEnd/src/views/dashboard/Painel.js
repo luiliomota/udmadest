@@ -98,17 +98,17 @@ const Painel = (withCharts) => {
                     Relatório
                   </CCardTitle>
                   <CCard className="mb-1">
-                    <Link style={varLink} to="/lancamento/contribuicao/relatorio">
+                    <Link style={varLink} to="/relatorio/contribuicao">
                       Contribuição
                     </Link>
                   </CCard>
                   <CCard className="mb-1">
-                    <Link style={varLink} to="/lancamento/saida/relatorio">
+                    <Link style={varLink} to="/relatorio/saida">
                       Saida
                     </Link>
                   </CCard>
                   <CCard>
-                    <Link style={varLink} to="/lancamento/contribuicao/relatorio">
+                    <Link style={varLink} to="/relatorio/geral">
                       Geral
                     </Link>
                   </CCard>
