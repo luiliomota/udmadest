@@ -1,9 +1,6 @@
 package com.alf5.udmadest.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -11,6 +8,7 @@ public class Consideracao {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate dataRegistro = LocalDate.now();
+    @Column(length = 4000)
     private String descricao;
     private LocalDate mesReferencia;
 

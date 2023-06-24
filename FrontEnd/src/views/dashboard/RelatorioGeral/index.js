@@ -2,8 +2,8 @@ import {
   CButton,
   CCard,
   CCardBody,
-  CCardText,
-  CCol,
+  CCardText, CCardTitle,
+  CCol, CHeaderText,
   CTable,
   CTableBody,
   CTableDataCell,
@@ -16,15 +16,18 @@ import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {useNavigate} from "react-router-dom";
 import api from "../../../Api";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import {Print} from "@mui/icons-material";
+import {CalendarMonth, DateRange, Print} from "@mui/icons-material";
 import {useReactToPrint} from "react-to-print";
 import logo from "../../../assets/images/logoUdmadest.png";
 import logoCiadseta from "../../../assets/images/CIADSETA.png";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const RelatorioGeral = () => {
 
   const componentRef = useRef(null);
-
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
   const reactToPrintContent = useCallback(() => {
     return componentRef.current;
   }, [componentRef.current]);
@@ -83,7 +86,24 @@ const RelatorioGeral = () => {
 
   return (
     <>
-      <Grid2 spacing={2}>
+      <Grid2 container item style={{textAlign:"center"}} spacing={2}>
+        <Grid2 item xs={12} md={5}>
+          <DatePicker
+                label="Período"
+                selectsRange={true}
+                startDate={startDate}
+                endDate={endDate}
+                dateFormat="dd/MM/yyyy"
+                onChange={(update) => {
+                  setDateRange(update);
+                }}
+                // peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                isClearable={true}
+            />
+        </Grid2>
         <Grid2 item xs={12} md={5}>
           <CButton
               className="btn btn-secondary"
@@ -99,12 +119,14 @@ const RelatorioGeral = () => {
           <img src={logo} alt="logo" style={{maxWidth: "-webkit-fill-available"}}/>
         </Grid2>
         <Grid2 xs={12} md={6} mb={2}>
-          <CCardText style={{fontSize: "80px", color: "#980708", fontWeight: "1000", marginTop: "-2px", marginBottom: "-30px"}}>
+          <CCard style={{backgroundColor: "unset", border: "none"}}>
+          <CCardTitle style={{fontSize: "4em", color: "#980708", fontWeight: "1000", marginTop: "-2px", marginBottom: "-15px"}}>
             MISSÕES
-          </CCardText>
-          <CCardText style={{fontSize: "20px", color: "#000", fontWeight: "1000", marginTop: "-2px", marginBottom: "10px"}}>
+          </CCardTitle>
+          </CCard>
+          <CCardTitle style={{fontSize: "20px", color: "#000", fontWeight: "1000", marginTop: "-2px", marginBottom: "20px"}}>
             Se faz indo, orando e contribuindo
-          </CCardText>
+          </CCardTitle>
           <CCardText style={{fontSize: "15px", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
             Assembleia de Deus - CIADSETA-TAQUARALTO
           </CCardText>
@@ -118,7 +140,7 @@ const RelatorioGeral = () => {
           </CCardText>
         </Grid2>
         <Grid2 container item xs={12} md={3} mb={2} style={{alignSelf: "baseline"}}>
-          <img src={logoCiadseta} alt="logo" style={{maxWidth: "-webkit-fill-available"}}/>
+          <img src={logoCiadseta} alt="logoCiadseta" style={{maxWidth: "-webkit-fill-available"}}/>
         </Grid2>
         <Grid2 xs={12} md={12}>
           <CCol xs>

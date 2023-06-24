@@ -1,6 +1,16 @@
 import React, {useEffect, useState} from 'react'
 
-import {CButton, CCard, CCardBody, CCol, CFormInput, CRow, CTableBody, CTableDataCell,} from '@coreui/react'
+import {
+    CButton,
+    CCard,
+    CCardBody,
+    CCol,
+    CFormInput,
+    CFormTextarea,
+    CRow,
+    CTableBody,
+    CTableDataCell,
+} from '@coreui/react'
 import api from "../../../../Api";
 import "../../../../styleNow.css";
 import {useNavigate, useParams} from "react-router-dom";
@@ -35,24 +45,22 @@ const EditarConsideracao = () => {
 console.log(consideracao);
   return (
         <CRow >
-            <CCard style={{border: "none",background: "transparent"}} className="align-items-center text-center mb-4">
+            <CCard style={{border: "none",background: "transparent", display: "grid"}} className="align-items-center text-center mb-4">
                 <CCardBody >
-                    <CTableBody>
                         <CRow>
-                            <CCol style={varCol} className="mb-1" sm={12} lg={9}>
-                                <CTableDataCell width="40%">
-                                    <CFormInput
+                            <CCol style={varCol} className="mb-1" sm={12}>
+                                    <CFormTextarea
                                         type="text"
                                         label="Descricao"
+                                        rows={5}
                                         value={consideracao.descricao}
                                         onChange={(e) => {
                                             setConsideracao({...consideracao, descricao: e.target.value})
                                         }
                                         }
                                     />
-                                </CTableDataCell>
                             </CCol>
-                            <CCol style={varCol} className="mb-1" sm={12} lg={3}>
+                            <CCol style={varCol} className="mb-1" sm={12}>
                                 <CTableDataCell>
                                     <CFormInput
                                         type="date"
@@ -66,14 +74,15 @@ console.log(consideracao);
                                 </CTableDataCell>
                             </CCol>
                         </CRow>
-                    </CTableBody>
                     <CCard style={{border: "none",background: "transparent"}}>
-                        <CButton
-                            style={{borderColor: "unset",color: "black",backgroundColor: "rgba(150,150,150,100%)"}}
-                            onClick={gravar}
-                        >
-                            Gravar
-                        </CButton>
+                        <CTableDataCell>
+                            <CButton
+                                style={{borderColor: "unset",color: "black",backgroundColor: "rgba(150,150,150,100%)"}}
+                                onClick={gravar}
+                            >
+                                Gravar
+                            </CButton>
+                        </CTableDataCell>
                     </CCard>
                 </CCardBody>
             </CCard>
