@@ -2,8 +2,9 @@ import {
   CButton,
   CCard,
   CCardBody,
-  CCardText, CCardTitle,
-  CCol, CHeaderText,
+  CCardText,
+  CCardTitle,
+  CCol,
   CTable,
   CTableBody,
   CTableDataCell,
@@ -16,13 +17,14 @@ import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {useNavigate} from "react-router-dom";
 import api from "../../../Api";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import {CalendarMonth, DateRange, Print} from "@mui/icons-material";
+import {Print} from "@mui/icons-material";
 import {useReactToPrint} from "react-to-print";
 import logo from "../../../assets/images/logoUdmadest2.png";
 import logoCiadseta from "../../../assets/images/CIADSETA.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import contribuicao from "../Contribuicao";
+import "../../../styleNow.css";
+import {Grid} from "@mui/material";
 
 const RelatorioGeral = () => {
 
@@ -160,74 +162,72 @@ const RelatorioGeral = () => {
           </CButton>
         </Grid2>
       </Grid2>
-      <Grid2 container item textAlign="center" sx={12} ml={6} mr={4.5} mt={6} mb={4.5} ref={componentRef}>
-        <Grid2 container item xs={12} md={3} mb={2} style={{alignSelf: "baseline"}}>
-          <img src={logo} alt="logo" style={{maxWidth: "-webkit-fill-available"}}/>
-        </Grid2>
-        <Grid2 xs={12} md={6} mb={2}>
-          <CCard style={{backgroundColor: "unset", border: "none"}}>
-          <CCardTitle style={{fontSize: "4em", color: "#980708", fontWeight: "1000", marginTop: "-2px", marginBottom: "-15px"}}>
-            MISSÕES
-          </CCardTitle>
-          </CCard>
-          <CCardTitle style={{fontSize: "20px", color: "#000", fontWeight: "1000", marginTop: "-2px", marginBottom: "20px"}}>
-            Se faz indo, orando e contribuindo
-          </CCardTitle>
-          <CCardText style={{fontSize: "15px", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
-            Assembleia de Deus - CIADSETA-TAQUARALTO
-          </CCardText>
-          <CCardText style={{fontSize: "15px", fontWeight: "750", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
-            Presidente do campo: &nbsp;
-            {presidente.nome}
-          </CCardText>
-          <CCardText style={{fontSize: "15px", fontWeight: "750", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
-            Diretor de missões: &nbsp;
-            {diretor.nome}
-          </CCardText>
-        </Grid2>
-        <Grid2 container item xs={12} md={3} mb={2} style={{alignSelf: "baseline"}}>
-          <img src={logoCiadseta} alt="logoCiadseta" style={{maxWidth: "-webkit-fill-available"}}/>
-        </Grid2>
-        <Grid2 xs={12} md={12}>
-          <CCol xs>
-            <CCard className="mb-4">
-              <CCardBody>
-                <CTable align="middle" className="mb-0 border" hover responsive>
-                  <CTableHead color="light">
-                    <CTableRow>
-                      <CTableHeaderCell>Congregação</CTableHeaderCell>
-                      <CTableHeaderCell>Data</CTableHeaderCell>
-                      <CTableHeaderCell>Carnê</CTableHeaderCell>
-                      <CTableHeaderCell>Oferta</CTableHeaderCell>
-                      <CTableHeaderCell>Total</CTableHeaderCell>
-                    </CTableRow>
-                  </CTableHead>
-                  <CTableBody>
-                    {tabelaFilter.map((item, index) => (
-                        <CTableRow v-for="item in tableItems" key={index}>
-                          <CTableDataCell>
-                            <div>{item.nomeCongregacao}</div>
-                          </CTableDataCell>
-                          <CTableDataCell>
-                            <div>{item.dataContribuicaoString}</div>
-                          </CTableDataCell>
-                          <CTableDataCell>
-                            <div>{"R$ "+item.carne}</div>
-                          </CTableDataCell>
-                          <CTableDataCell>
-                            <div>{"R$ "+item.oferta}</div>
-                          </CTableDataCell>
-                          <CTableDataCell style={{fontWeight: "bold"}}>
-                            <div>{"R$ "+(item.carne + item.oferta)}</div>
-                          </CTableDataCell>
-                        </CTableRow>
-                    ))}
-                  </CTableBody>
-                </CTable>
-              </CCardBody>
+      <Grid2 container item textAlign="center" ml={6} mr={4.5} mt={6} mb={4.5} ref={componentRef}>
+          <Grid2 item xl={3} lg={3} md={3} sm={3} xs={3} style={{alignSelf: "baseline"}}>
+            <img src={logo} alt="logo" style={{maxWidth: "-webkit-fill-available"}}/>
+          </Grid2>
+          <Grid2 item xl={6} lg={6} md={6} sm={6} xs={6} >
+            <CCard style={{backgroundColor: "unset", border: "none"}}>
+            <CCardTitle style={{fontSize: "4em", color: "#980708", fontWeight: "1000", marginTop: "-2px", marginBottom: "-15px"}}>
+              MISSÕES
+            </CCardTitle>
             </CCard>
-          </CCol>
-        </Grid2>
+            <CCardTitle style={{fontSize: "20px", color: "#000", fontWeight: "1000", marginTop: "-2px", marginBottom: "20px"}}>
+              Se faz indo, orando e contribuindo
+            </CCardTitle>
+            <CCardText style={{fontSize: "15px", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
+              Assembleia de Deus - CIADSETA-TAQUARALTO
+            </CCardText>
+            <CCardText style={{fontSize: "15px", fontWeight: "750", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
+              Presidente do campo: &nbsp;
+              {presidente.nome}
+            </CCardText>
+            <CCardText style={{fontSize: "15px", fontWeight: "750", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
+              Diretor de missões: &nbsp;
+              {diretor.nome}
+            </CCardText>
+          </Grid2>
+          <Grid2 item xl={3} lg={3} md={3} sm={3} xs={3} style={{alignSelf: "baseline"}}>
+            <img src={logoCiadseta} alt="logoCiadseta" style={{maxWidth: "-webkit-fill-available"}}/>
+          </Grid2>
+          <Grid2 xs={12} md={12} mt={4} className="logo_udmadest_fundo_table">
+            <CCol mb={-4}>
+                <CCardBody>
+                  <CTable align="middle" className="mb-0" hover responsive>
+                    <CTableHead color="light">
+                      <CTableRow>
+                        <CTableHeaderCell>Congregação</CTableHeaderCell>
+                        <CTableHeaderCell>Data</CTableHeaderCell>
+                        <CTableHeaderCell>Carnê</CTableHeaderCell>
+                        <CTableHeaderCell>Oferta</CTableHeaderCell>
+                        <CTableHeaderCell>Total</CTableHeaderCell>
+                      </CTableRow>
+                    </CTableHead>
+                    <CTableBody>
+                      {tabelaFilter.map((item, index) => (
+                          <CTableRow v-for="item in tableItems" key={index}>
+                            <CTableDataCell>
+                              <div>{item.nomeCongregacao}</div>
+                            </CTableDataCell>
+                            <CTableDataCell>
+                              <div>{item.dataContribuicaoString}</div>
+                            </CTableDataCell>
+                            <CTableDataCell>
+                              <div>{"R$ "+item.carne}</div>
+                            </CTableDataCell>
+                            <CTableDataCell>
+                              <div>{"R$ "+item.oferta}</div>
+                            </CTableDataCell>
+                            <CTableDataCell style={{fontWeight: "bold"}}>
+                              <div>{"R$ "+(item.carne + item.oferta)}</div>
+                            </CTableDataCell>
+                          </CTableRow>
+                      ))}
+                    </CTableBody>
+                  </CTable>
+                </CCardBody>
+            </CCol>
+          </Grid2>
       </Grid2>
     </>
   )
