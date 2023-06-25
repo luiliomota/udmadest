@@ -31,7 +31,7 @@ const navigate = useNavigate();
   )
 
   useEffect(() => {
-    api.get("/api/diretoria")
+    api.get("/api/diretoria?size=1000")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -47,7 +47,7 @@ const navigate = useNavigate();
   }
 
   function atualizarTabela() {
-    api.get("/api/diretoria")
+    api.get("/api/diretoria?size=1000")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -57,10 +57,8 @@ const navigate = useNavigate();
     <>
       <CRow>
         <CCol md={6}>
-          <CButton className="mb-0 border-dark" color="light">
-            <Link className="text-decoration-none" to="/cadastro/diretoria/novo">
+          <CButton className="mb-0 border-dark" color="light" onClick={() => navigate("/cadastro/diretoria/novo")}>
               Novo
-            </Link>
           </CButton>
         </CCol>
       </CRow>

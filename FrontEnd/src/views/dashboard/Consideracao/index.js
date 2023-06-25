@@ -30,7 +30,7 @@ const PainelConsideracao = () => {
   )
 
   useEffect (() => {
-    api.get("/api/consideracao")
+    api.get("/api/consideracao?size=1000&sort=id,desc")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -46,7 +46,7 @@ const PainelConsideracao = () => {
   }
 
   function atualizarTabela() {
-    api.get("/api/consideracao")
+    api.get("/api/consideracao?size=1000&sort=id,desc")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -56,10 +56,8 @@ const PainelConsideracao = () => {
     <>
       <CRow>
         <CCol md={6}>
-          <CButton className="mb-0 border-dark" color="light">
-            <Link className="text-decoration-none" to="/lancamento/consideracao/novo">
+          <CButton className="mb-0 border-dark" color="light" onClick={() => navigate("/lancamento/consideracao/novo")}>
               Novo
-            </Link>
           </CButton>
         </CCol>
       </CRow>

@@ -30,7 +30,7 @@ const navigate = useNavigate();
   )
 
   useEffect(() => {
-    api.get("/api/congregacao")
+    api.get("/api/congregacao?size=1000&sort=nome,asc")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -46,7 +46,7 @@ const navigate = useNavigate();
   }
 
   function atualizarTabela() {
-    api.get("/api/congregacao")
+    api.get("/api/congregacao?size=1000&sort=nome,asc")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -56,10 +56,8 @@ const navigate = useNavigate();
     <>
       <CRow>
         <CCol md={6}>
-          <CButton className="mb-0 border-dark" color="light">
-            <Link className="text-decoration-none" to="/cadastro/congregacao/novo">
-              Novo
-            </Link>
+          <CButton className="mb-0 border-dark" color="light" onClick={() => navigate('/cadastro/congregacao/novo')}>
+            Novo
           </CButton>
         </CCol>
       </CRow>

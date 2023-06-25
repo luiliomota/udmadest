@@ -19,8 +19,8 @@ public class ContribuicaoForm {
             Congregacao congregacao = congregacaoRepository.getReferenceById(this.idCongregacao);
             contribuicao.setCongregacao(congregacao);
             contribuicao.setDataContribuicao(this.dataContribuicao);
-            contribuicao.setCarne(new BigDecimal(this.carne));
-            contribuicao.setOferta(new BigDecimal(this.oferta));
+            contribuicao.setCarne(new BigDecimal(this.carne.replace(",",".")));
+            contribuicao.setOferta(new BigDecimal(this.oferta.replace(",",".")));
             return contribuicao;
         }
         return null;

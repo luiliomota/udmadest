@@ -24,7 +24,7 @@ const NovaContribuicao = () => {
   });
 
     useEffect(() => {
-        api.get("/api/congregacao")
+        api.get("/api/congregacao?size=1000&sort=nome,asc")
             .then((response) => {
                 setListaCongregacoes(response.data.content);
             })

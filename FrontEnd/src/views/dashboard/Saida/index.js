@@ -31,7 +31,7 @@ const PainelSaida = () => {
   )
 
   useEffect (() => {
-    api.get("/api/saida")
+    api.get("/api/saida?size=1000&sort=id,desc")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -47,7 +47,7 @@ const PainelSaida = () => {
   }
 
   function atualizarTabela() {
-    api.get("/api/saida")
+    api.get("/api/saida?size=1000&sort=id,desc")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -57,10 +57,8 @@ const PainelSaida = () => {
     <>
       <CRow>
         <CCol md={6}>
-          <CButton className="mb-0 border-dark" color="light">
-            <Link className="text-decoration-none" to="/lancamento/saida/novo">
+          <CButton className="mb-0 border-dark" color="light" onClick={() => navigate("/lancamento/saida/novo")}>
               Novo
-            </Link>
           </CButton>
         </CCol>
       </CRow>

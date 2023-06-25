@@ -18,16 +18,19 @@ import api from "../../../Api";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import {CalendarMonth, DateRange, Print} from "@mui/icons-material";
 import {useReactToPrint} from "react-to-print";
-import logo from "../../../assets/images/logoUdmadest.png";
+import logo from "../../../assets/images/logoUdmadest2.png";
 import logoCiadseta from "../../../assets/images/CIADSETA.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import contribuicao from "../Contribuicao";
 
 const RelatorioGeral = () => {
 
   const componentRef = useRef(null);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
+  // const [startDateFilter, setStartDateFilter] = useState(new Date('1900-1-1'));
+  // const [endDateFilter, setEndDateFilter] = useState(new Date('2999-12-31'));
   const reactToPrintContent = useCallback(() => {
     return componentRef.current;
   }, [componentRef.current]);
@@ -48,6 +51,15 @@ const RelatorioGeral = () => {
       },
     ]
   );
+  const [tabelaFilter, setTabelaFilter] = useState([
+    {
+      nomeCongregacao: "",
+      dataContribuicaoString: "",
+      carne: "",
+      oferta: "",
+      total: "",
+    }
+  ])
 
   const [diretoria, setDiretoria] = useState([]);
   const [presidente, setPresidente] = useState({
@@ -70,18 +82,44 @@ const RelatorioGeral = () => {
   },[]);
 
   useEffect (() => {
-    api.get("/api/contribuicao")
+    api.get("/api/contribuicao?size=1000&sort=dataContribuicao,asc")
         .then((response) => {
           setTabela(response.data.content);
+          setTabelaFilter(response.data.content);
         })
         .catch((error) => console.error(error));
   },[]);
 
   function atualizarTabela() {
-    api.get("/api/contribuicao")
+    api.get("/api/contribuicao?size=1000&sort=dataContribuicao,asc")
         .then((response) => {
           setTabela(response.data.content);
+          setTabelaFilter(response.data.content);
         })
+  }
+
+  function filterTabela(data, startFilter, endFilter) {
+    let dayStart = startFilter.getDate();
+    let monthStart = startFilter.getMonth()+1;
+    let dayEnd = endFilter.getDate();
+    let monthEnd = endFilter.getMonth()+1;
+
+    if (dayStart < 10){
+      dayStart = ('0' + dayStart);
+    }
+    if (monthStart < 10){
+      monthStart = ('0' + monthStart);
+    }
+    if (dayEnd < 10) {
+      dayEnd = ('0' + dayEnd);
+    }
+    if (monthEnd < 10) {
+      monthEnd = ('0' + monthEnd);
+    }
+    let start = (startFilter.getFullYear()+"-"+monthStart+"-"+dayStart);
+    let end = (endFilter.getFullYear()+"-"+monthEnd+"-"+dayEnd);
+    let tab = data.filter(item => (item.dataContribuicaoDate >= start && item.dataContribuicaoDate <= end));
+    return tab;
   }
 
   return (
@@ -89,15 +127,23 @@ const RelatorioGeral = () => {
       <Grid2 container item style={{textAlign:"center"}} spacing={2}>
         <Grid2 item xs={12} md={5}>
           <DatePicker
-                label="Período"
                 selectsRange={true}
                 startDate={startDate}
                 endDate={endDate}
                 dateFormat="dd/MM/yyyy"
                 onChange={(update) => {
                   setDateRange(update);
+                  let start = '1900-1-01';
+                  let end = '2999-12-31';
+                  if (update[0] != null) {
+                    start = update[0];
+                  }
+                  if (update[1] != null) {
+                    end = update[1];
+                  }
+                  setTabelaFilter(filterTabela(tabela, new Date(start), new Date(end)));
                 }}
-                // peekNextMonth
+                peekNextMonth
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
@@ -157,7 +203,7 @@ const RelatorioGeral = () => {
                     </CTableRow>
                   </CTableHead>
                   <CTableBody>
-                    {tabela.map((item, index) => (
+                    {tabelaFilter.map((item, index) => (
                         <CTableRow v-for="item in tableItems" key={index}>
                           <CTableDataCell>
                             <div>{item.nomeCongregacao}</div>

@@ -33,7 +33,7 @@ const PainelContribuicao = () => {
   )
 
   useEffect (() => {
-    api.get("/api/contribuicao")
+    api.get("/api/contribuicao?size=1000&sort=id,desc")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -49,7 +49,7 @@ const PainelContribuicao = () => {
   }
 
   function atualizarTabela() {
-    api.get("/api/contribuicao")
+    api.get("/api/contribuicao?size=1000&sort=id,desc")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -59,10 +59,8 @@ const PainelContribuicao = () => {
     <>
       <CRow>
         <CCol md={6}>
-          <CButton className="mb-0 border-dark" color="light">
-            <Link className="text-decoration-none" to="/lancamento/contribuicao/novo">
+          <CButton className="mb-0 border-dark" color="light" onClick={() => navigate("/lancamento/contribuicao/novo")}>
               Novo
-            </Link>
           </CButton>
         </CCol>
       </CRow>
