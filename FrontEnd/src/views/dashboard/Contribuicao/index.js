@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from 'react'
 
 import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCol,
-  CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
+    CButton,
+    CCard,
+    CCardBody,
+    CCol,
+    CRow,
+    CTable,
+    CTableBody,
+    CTableDataCell,
+    CTableHead,
+    CTableHeaderCell,
+    CTableRow,
 } from '@coreui/react'
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {IconButton} from "@mui/material";
 import {Delete, Edit} from "@mui/icons-material";
 import api from "../../../Api";
@@ -90,13 +90,13 @@ const PainelContribuicao = () => {
                         <div>{item.dataContribuicaoString}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>{"R$ "+item.carne}</div>
+                        <div>{"R$ "+parseFloat(item.carne).toFixed(2).toString().replace(".",",")}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>{"R$ "+item.oferta}</div>
+                        <div>{"R$ "+parseFloat(item.oferta).toFixed(2).toString().replace(".",",")}</div>
                       </CTableDataCell>
                       <CTableDataCell style={{fontWeight: "bold"}}>
-                        <div>{"R$ "+(item.carne + item.oferta)}</div>
+                        <div>{"R$ " + parseFloat(item.carne + item.oferta).toFixed(2).toString().replace(".",",")}</div>
                       </CTableDataCell>
                       <CTableDataCell>
                         <IconButton onClick={() => navigate(`/lancamento/contribuicao/editar/${item.id}`)}>

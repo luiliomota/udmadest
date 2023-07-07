@@ -73,13 +73,13 @@ const RelatorioContribuicao = () => {
                         <div>{item.dataContribuicaoString}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>{"R$ "+item.carne}</div>
+                        <div>{"R$ "+parseFloat(item.carne).toFixed(2).toString().replace(".",",")}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>{"R$ "+item.oferta}</div>
+                        <div>{"R$ "+parseFloat(item.oferta).toFixed(2).toString().replace(".",",")}</div>
                       </CTableDataCell>
                       <CTableDataCell style={{fontWeight: "bold"}}>
-                        <div>{"R$ "+(item.carne + item.oferta)}</div>
+                        <div>{"R$ "+parseFloat(item.carne + item.oferta).toFixed(2).toString().replace(".",",")}</div>
                       </CTableDataCell>
                     </CTableRow>
                   ))}

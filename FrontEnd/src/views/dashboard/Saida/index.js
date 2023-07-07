@@ -86,7 +86,7 @@ const PainelSaida = () => {
                         <div>{item.dataSaidaString}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>{"R$ "+item.valor}</div>
+                        <div>{"R$ "+parseFloat(item.valor).toFixed(2).toString().replace(".",",")}</div>
                       </CTableDataCell>
                       <CTableDataCell>
                         <IconButton onClick={() => navigate(`/lancamento/saida/editar/${item.id}`)}>

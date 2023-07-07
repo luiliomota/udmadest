@@ -1,44 +1,44 @@
 import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCardText,
-  CCardTitle,
-  CCol,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
+    CButton,
+    CCard,
+    CCardBody,
+    CCardText,
+    CCardTitle,
+    CCol,
+    CTable,
+    CTableBody,
+    CTableDataCell,
+    CTableHead,
+    CTableHeaderCell,
+    CTableRow,
 } from '@coreui/react'
 
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {useNavigate} from "react-router-dom";
 import api from "../../../Api";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import {Print} from "@mui/icons-material";
 import {useReactToPrint} from "react-to-print";
 import logo from "../../../assets/images/logoUdmadest2.png";
 import logoCiadseta from "../../../assets/images/CIADSETA.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../../../styleNow.css";
-import {Grid} from "@mui/material";
+import CIcon from "@coreui/icons-react";
+import {cilPrint} from "@coreui/icons";
+import MediaQuery from 'react-responsive';
 
 const RelatorioGeral = () => {
 
   const componentRef = useRef(null);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  // const [startDateFilter, setStartDateFilter] = useState(new Date('1900-1-1'));
-  // const [endDateFilter, setEndDateFilter] = useState(new Date('2999-12-31'));
   const reactToPrintContent = useCallback(() => {
     return componentRef.current;
   }, [componentRef.current]);
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
+    pageStyle: "@page { size: A4 portrait } ",
   });
 
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
@@ -84,7 +84,7 @@ const RelatorioGeral = () => {
   },[]);
 
   useEffect (() => {
-    api.get("/api/contribuicao?size=1000&sort=dataContribuicao,asc")
+    api.get("/api/contribuicao?size=1000&sort=id,asc")
         .then((response) => {
           setTabela(response.data.content);
           setTabelaFilter(response.data.content);
@@ -93,7 +93,7 @@ const RelatorioGeral = () => {
   },[]);
 
   function atualizarTabela() {
-    api.get("/api/contribuicao?size=1000&sort=dataContribuicao,asc")
+    api.get("/api/contribuicao?size=1000&sort=id,asc")
         .then((response) => {
           setTabela(response.data.content);
           setTabelaFilter(response.data.content);
@@ -126,8 +126,8 @@ const RelatorioGeral = () => {
 
   return (
     <>
-      <Grid2 container item style={{textAlign:"center"}} spacing={2}>
-        <Grid2 item xs={12} md={5}>
+      <Grid2 container item="true" style={{textAlign:"center"}} spacing={2}>
+        <Grid2 item="true" xl={6} lg={6} md={6} sm={6} xs={6}>
           <DatePicker
                 selectsRange={true}
                 startDate={startDate}
@@ -152,85 +152,88 @@ const RelatorioGeral = () => {
                 isClearable={true}
             />
         </Grid2>
-        <Grid2 item xs={12} md={5}>
-          <CButton
-              className="btn btn-secondary"
-              startIcon={<Print/>}
-              onClick={handlePrint}
-          >
-            Visualizar Impressão
-          </CButton>
+        <Grid2 item="true" xl={6} lg={6} md={6} sm={6} xs={6}>
+            <CButton
+                className="btn btn-secondary"
+                onClick={handlePrint}
+            >
+                <CIcon icon = {cilPrint}/>
+                <MediaQuery minWidth={530}>
+                    &nbsp;
+                    Visualizar Impressão
+                </MediaQuery>
+            </CButton>
         </Grid2>
       </Grid2>
-      <Grid2 container item textAlign="center" ml={6} mr={4.5} mt={6} mb={4.5} ref={componentRef}>
-          <Grid2 item xl={3} lg={3} md={3} sm={3} xs={3} style={{alignSelf: "baseline"}}>
+      <Grid2 container style={{marginLeft: "0px", marginRight: "0px"}} item="true" textAlign="center" ml={6} mr={4.5} mt={6} mb={4.5} ref={componentRef}>
+          <Grid2 item="true" xl={3} lg={3} md={3} sm={3} xs={3} style={{alignSelf: "baseline"}}>
             <img src={logo} alt="logo" style={{maxWidth: "-webkit-fill-available"}}/>
           </Grid2>
-          <Grid2 item xl={6} lg={6} md={6} sm={6} xs={6} >
+          <Grid2 item="true" xl={6} lg={6} md={6} sm={6} xs={6} >
             <CCard style={{backgroundColor: "unset", border: "none"}}>
-            <CCardTitle style={{fontSize: "4em", color: "#980708", fontWeight: "1000", marginTop: "-2px", marginBottom: "-15px"}}>
+            <CCardTitle style={{fontSize: "clamp(2rem, 9vw, 5rem)", color: "#980708", fontWeight: "1000", marginTop: "-2px", marginBottom: "-15px"}}>
               MISSÕES
             </CCardTitle>
             </CCard>
-            <CCardTitle style={{fontSize: "20px", color: "#000", fontWeight: "1000", marginTop: "-2px", marginBottom: "20px"}}>
+            <CCardTitle style={{fontSize: "clamp(0rem, 3vw, 1.3rem)", color: "#000", fontWeight: "1000", marginTop: "1px", marginBottom: "20px"}}>
               Se faz indo, orando e contribuindo
             </CCardTitle>
-            <CCardText style={{fontSize: "15px", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
+            <CCardText style={{fontSize: "clamp(0.55rem, 2vw, 1rem)", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
               Assembleia de Deus - CIADSETA-TAQUARALTO
             </CCardText>
-            <CCardText style={{fontSize: "15px", fontWeight: "750", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
+            <CCardText style={{fontSize: "clamp(0.55rem, 2vw, 1rem)", fontWeight: "750", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
               Presidente do campo: &nbsp;
               {presidente.nome}
             </CCardText>
-            <CCardText style={{fontSize: "15px", fontWeight: "750", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
+            <CCardText style={{fontSize: "clamp(0.55rem, 2vw, 1rem)", fontWeight: "750", marginTop: "-2px", marginBottom: "0", fontStyle: "italic"}}>
               Diretor de missões: &nbsp;
               {diretor.nome}
             </CCardText>
           </Grid2>
-          <Grid2 item xl={3} lg={3} md={3} sm={3} xs={3} style={{alignSelf: "baseline"}}>
+          <Grid2 item="true" xl={3} lg={3} md={3} sm={3} xs={3} style={{alignSelf: "baseline"}}>
             <img src={logoCiadseta} alt="logoCiadseta" style={{maxWidth: "-webkit-fill-available"}}/>
           </Grid2>
-          <Grid2 xs={12} md={12} mt={4} className="logo_udmadest_fundo_table">
+          <Grid2 className="logo_udmadest_fundo_table" xs={12} md={12} mt={4}>
             <CCol mb={-4}>
                 <CCardBody>
-                  <CTable align="middle" className="mb-0" hover responsive>
-                    <CTableHead color="light">
-                      <CTableRow>
-                        <CTableHeaderCell>Congregação</CTableHeaderCell>
-                        <CTableHeaderCell>Data</CTableHeaderCell>
-                        <CTableHeaderCell>Carnê</CTableHeaderCell>
-                        <CTableHeaderCell>Oferta</CTableHeaderCell>
-                        <CTableHeaderCell>Total</CTableHeaderCell>
-                      </CTableRow>
-                    </CTableHead>
-                    <CTableBody>
-                      {tabelaFilter.map((item, index) => (
-                          <CTableRow v-for="item in tableItems" key={index}>
-                            <CTableDataCell>
-                              <div>{item.nomeCongregacao}</div>
-                            </CTableDataCell>
-                            <CTableDataCell>
-                              <div>{item.dataContribuicaoString}</div>
-                            </CTableDataCell>
-                            <CTableDataCell>
-                              <div>{"R$ "+item.carne}</div>
-                            </CTableDataCell>
-                            <CTableDataCell>
-                              <div>{"R$ "+item.oferta}</div>
-                            </CTableDataCell>
-                            <CTableDataCell style={{fontWeight: "bold"}}>
-                              <div>{"R$ "+(item.carne + item.oferta)}</div>
-                            </CTableDataCell>
+                      <CTable style={{fontSize: "clamp(0.7rem, 3vw, 1rem"}} align="middle" className="mb-0" hover responsive>
+                        <CTableHead color="light">
+                          <CTableRow>
+                            <CTableHeaderCell>Congregação</CTableHeaderCell>
+                            <CTableHeaderCell>Data</CTableHeaderCell>
+                            <CTableHeaderCell>Carnê</CTableHeaderCell>
+                            <CTableHeaderCell>Oferta</CTableHeaderCell>
+                            <CTableHeaderCell>Total</CTableHeaderCell>
                           </CTableRow>
-                      ))}
-                    </CTableBody>
-                  </CTable>
-                </CCardBody>
+                        </CTableHead>
+                        <CTableBody className="">
+                          {tabelaFilter.map((item, index) => (
+                              <CTableRow v-for="item in tableItems" key={index}>
+                                <CTableDataCell>
+                                  <div>{item.nomeCongregacao}</div>
+                                </CTableDataCell>
+                                <CTableDataCell>
+                                  <div>{item.dataContribuicaoString}</div>
+                                </CTableDataCell>
+                                <CTableDataCell>
+                                  <div>{"R$ "+parseFloat(item.carne).toFixed(2).toString().replace(".",",")}</div>
+                                </CTableDataCell>
+                                <CTableDataCell>
+                                  <div>{"R$ "+parseFloat(item.oferta).toFixed(2).toString().replace(".",",")}</div>
+                                </CTableDataCell>
+                                <CTableDataCell style={{fontWeight: "bold"}}>
+                                  <div>{"R$ "+parseFloat(item.carne + item.oferta).toFixed(2).toString().replace(".",",")}</div>
+                                </CTableDataCell>
+                              </CTableRow>
+                          ))}
+                        </CTableBody>
+                      </CTable>
+                    </CCardBody>
             </CCol>
+            </Grid2>
           </Grid2>
-      </Grid2>
-    </>
-  )
-}
+      </>
+    )
+  }
 
 export default RelatorioGeral
