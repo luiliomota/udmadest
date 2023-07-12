@@ -1,10 +1,10 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import {useContext, useState} from 'react';
+import {Link} from 'react-router-dom';
 import {
   CButton,
   CCard,
   CCardBody,
-  CCardGroup,
+  CCardGroup, CCardText,
   CCol,
   CContainer,
   CForm,
@@ -12,14 +12,20 @@ import {
   CInputGroup,
   CInputGroupText,
   CRow,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import {cilLockLocked, cilUser} from '@coreui/icons'
-import '../../../styleNow.css'
-import imgLogo from "./../../../assets/images/logo.png"
+} from '@coreui/react';
+import CIcon from '@coreui/icons-react';
+import {cilLockLocked, cilUser} from '@coreui/icons';
+import '../../../styleNow.css';
+import imgLogo from "./../../../assets/images/logo.png";
+import { Context } from "../../../context/auth";
 
-const Login = () => {
+function Login() {
+  const { mensagens, handleLogin } = useContext(Context);
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+console.log("usuario: "+username);
+console.log("senha: "+password);
   return (
     <div className="imagem_de_fundo_login bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -40,7 +46,12 @@ const Login = () => {
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Username" autoComplete="username" />
+                      <CFormInput
+                          placeholder="Username"
+                          autoComplete="username"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -50,15 +61,22 @@ const Login = () => {
                         type="password"
                         placeholder="Password"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
+                    </CInputGroup>
+                    <CInputGroup>
+                      <CCardText>
+                        {mensagens}
+                      </CCardText>
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <Link to="/painel">
-                          <CButton color="secondary" className="px-4">
-                            Login
+                          <CButton color="secondary" className="px-4"
+                                   onClick={() => handleLogin({username, password})}
+                          >
+                            Entrar
                           </CButton>
-                        </Link>
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">

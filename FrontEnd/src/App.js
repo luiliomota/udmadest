@@ -20,17 +20,17 @@ const Register = React.lazy(() => import('./views/pages/register/Register'))
 class App extends Component {
   render() {
     return (
-      <HashRouter>
+      // <HashRouter>
         <Suspense fallback={loading}>
           <Routes>
             <Route exact path="/login" name="Página de Login" element={<Login />} />
             <Route exact path="/register" name="Página de registro" element={<Register />} />
             {/*<Route exact path="/404" name="Page 404" element={<Page404 />} />*/}
             {/*<Route exact path="/500" name="Page 500" element={<Page500 />} />*/}
-            <Route path="*" name="Home" element={<DefaultLayout />} />
+            <Route path="*" name="/" element={<DefaultLayout />} />
           </Routes>
         </Suspense>
-      </HashRouter>
+      // </HashRouter>
     )
   }
 }

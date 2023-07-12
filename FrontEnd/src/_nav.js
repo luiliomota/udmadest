@@ -78,12 +78,12 @@ const _nav = [
       },
     ],
   },
-  {
-    component: CNavItem,
-    name: 'Sair',
-    to: '/login',
-    icon: <CIcon icon={cilAccountLogout} customClassName="nav-icon" />
-  }
+  // {
+  //   component: CNavItem,
+  //   name: 'Sair',
+  //   to: '/login',
+  //   icon: <CIcon icon={cilAccountLogout} customClassName="nav-icon" />
+  // }
   // {
   //   component: CNavGroup,
   //   name: 'Pages',
