@@ -1,6 +1,6 @@
-import React, { Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
-import { CContainer, CSpinner } from '@coreui/react'
+import React, {Suspense} from 'react'
+import {Navigate, Route, Routes} from 'react-router-dom'
+import {CContainer, CSpinner} from '@coreui/react'
 
 // routes config
 import routes from '../routes'
@@ -23,7 +23,7 @@ const AppContent = () => {
               )
             )
           })}
-          <Route path="/" element={<Navigate to="login" replace />} />
+          <Route path="/" element={<Navigate to="painel" replace />} />
         </Routes>
       </Suspense>
     </CContainer>

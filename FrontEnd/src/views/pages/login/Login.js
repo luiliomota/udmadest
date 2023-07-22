@@ -4,11 +4,12 @@ import {
   CButton,
   CCard,
   CCardBody,
-  CCardGroup, CCardText,
+  CCardGroup,
+  CCardText,
   CCol,
   CContainer,
   CForm,
-  CFormInput, CImage,
+  CFormInput,
   CInputGroup,
   CInputGroupText,
   CRow,
@@ -17,15 +18,15 @@ import CIcon from '@coreui/icons-react';
 import {cilLockLocked, cilUser} from '@coreui/icons';
 import '../../../styleNow.css';
 import imgLogo from "./../../../assets/images/logo.png";
-import { Context } from "../../../context/auth";
+import {Context} from "../../../context/auth";
 
 function Login() {
+
   const { mensagens, handleLogin } = useContext(Context);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-console.log("usuario: "+username);
-console.log("senha: "+password);
+
   return (
     <div className="imagem_de_fundo_login bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -66,7 +67,8 @@ console.log("senha: "+password);
                       />
                     </CInputGroup>
                     <CInputGroup>
-                      <CCardText>
+                      <CCardText
+                      color="error">
                         {mensagens}
                       </CCardText>
                     </CInputGroup>

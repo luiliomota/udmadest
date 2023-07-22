@@ -1,6 +1,8 @@
 import React, {Component, Suspense} from 'react'
-import {HashRouter, Route, Routes} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import './scss/style.scss'
+import routes from "./routes";
+import PrivateRoute from "./components/PrivateRoute";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -19,20 +21,33 @@ const Register = React.lazy(() => import('./views/pages/register/Register'))
 
 class App extends Component {
   render() {
-    return (
-      // <HashRouter>
+      const getRoutes = (allRoutes) =>
+        allRoutes.map((route) => {
+            if (route.route) {
+                if (route.isPrivate) {
+                    return (
+                        <Route exact path={route.route} element={<PrivateRoute perfis={route.perfis}/>}>
+                            <Route exact path={route.route} element={route.component}/>;
+                        </Route>
+                    );
+                } else {
+                    return <Route exact path={route.route} element={route.component}/>;
+                }
+            }
+            return null;
+        });
+
+      return (
         <Suspense fallback={loading}>
           <Routes>
-            <Route exact path="/login" name="Página de Login" element={<Login />} />
-            <Route exact path="/register" name="Página de registro" element={<Register />} />
-            {/*<Route exact path="/404" name="Page 404" element={<Page404 />} />*/}
-            {/*<Route exact path="/500" name="Page 500" element={<Page500 />} />*/}
-            <Route path="*" name="/" element={<DefaultLayout />} />
+            {getRoutes(routes)}
+            <Route exact path="/login" name="Página de Login" element={<Login/>}/>
+            <Route exact path="/register" name="Página de registro" element={<Register/>}/>
+            <Route path="*" name="home" element={<DefaultLayout />} />
           </Routes>
         </Suspense>
-      // </HashRouter>
     )
   }
 }
-
 export default App
+

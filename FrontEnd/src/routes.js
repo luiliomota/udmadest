@@ -1,6 +1,5 @@
 import React from 'react'
 
-const Login = React.lazy(() => import('./views/pages/login/Login'))
 const Painel = React.lazy(() => import('./views/dashboard/Painel'))
 const Congregacao = React.lazy(() => import('./views/dashboard/Congregacao'))
 const NovaCongregacao = React.lazy(() => import('./views/dashboard/Congregacao/Novo'))
@@ -71,10 +70,21 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
-  { path: '/', exact: true, name: 'Home', },
-  { path: '/login', name: 'Login', element: Login },
-  { path: '/painel', name: 'Painel', element: Painel },
-  { path: '/cadastro/congregacao', name: 'Congregacao', element: Congregacao },
+  {
+    path: '/',
+    exact: true,
+    name: 'Home',
+  },
+  {
+    path: '/painel',
+    name: 'Painel',
+    element: Painel,
+  },
+  {
+    path: '/cadastro/congregacao',
+    name: 'Congregacao',
+    element: Congregacao,
+  },
   { path: '/cadastro/congregacao/novo', name: 'NovaCongregacao', element: NovaCongregacao },
   { path: '/cadastro/congregacao/editar/:id', name: 'EditarCongregacao', element: EditarCongregacao },
   { path: '/cadastro/diretoria', name: 'Diretoria', element: Diretoria },

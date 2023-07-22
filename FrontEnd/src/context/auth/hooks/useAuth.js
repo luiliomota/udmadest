@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import api from '../../../Api';
+import {configs} from "eslint-plugin-prettier";
+
+const DefaultLayout = React.lazy(() => import('./../../../layout/DefaultLayout'));
+
+
 export default function useAuth() {
 
     const navigate = useNavigate();
@@ -21,6 +25,7 @@ export default function useAuth() {
             setRoles(JSON.parse(roles));
         }
         setLoading(false);
+
     }, []);
 
     async function handleLogin({ username, password }) {
@@ -65,12 +70,15 @@ export default function useAuth() {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('roles');
         api.defaults.headers.Authorization = undefined;
-        navigate('/login');
     }
 
     function tokenExpirado (token){
-        const jwtPayload = JSON.parse(window.atob(token.split('.')[1]));
-        return (jwtPayload.exp * 1000) < new Date().getTime();
+        if (api.defaults.headers.Authorization !== undefined) {
+            const jwtPayload = JSON.parse(window.atob(token.split('.')[1]));
+            return (jwtPayload.exp * 1000) < new Date().getTime();
+        } else {
+            return false;
+        }
     }
 
     return { authenticated, roles, loading, mensagens, handleLogin, handleLogout };
