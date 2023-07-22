@@ -249,7 +249,7 @@ const RelatorioGeral = () => {
                                 <CTableHeaderCell>Total</CTableHeaderCell>
                               </CTableRow>
                             </CTableHead>
-                            <CTableBody className="">
+                            <CTableBody>
                               {tabelaFilter.map((item, index) => (
                                   <CTableRow v-for="item in tableItems" key={index}>
                                     <CTableDataCell>

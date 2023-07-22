@@ -7,13 +7,14 @@ import {
     CCol,
     CFormInput,
     CFormTextarea,
-    CRow,
+    CRow, CTable,
     CTableBody,
-    CTableDataCell,
+    CTableDataCell, CTableHead, CTableHeaderCell, CTableRow,
 } from '@coreui/react'
 import api from "../../../../Api";
 import "../../../../styleNow.css";
 import {useNavigate, useParams} from "react-router-dom";
+import Grid2 from "@mui/material/Unstable_Grid2";
 
 const EditarConsideracao = () => {
     const {id} = useParams();
@@ -42,14 +43,18 @@ const EditarConsideracao = () => {
         })
         .catch((error) => console.error(error))
   }
-console.log(consideracao);
+
   return (
-        <CRow >
-            <CCard style={{border: "none",background: "transparent", display: "grid"}} className="align-items-center text-center mb-4">
-                <CCardBody >
-                        <CRow>
-                            <CCol style={varCol} className="mb-1" sm={12}>
+      <Grid2 container style={{marginLeft: "0px", marginRight: "0px"}} item="true" textAlign="center" ml={6} mr={4.5} mb={4.5}>
+        <Grid2 xs={12} md={12}>
+            <CCol mb={-4}>
+                <CCardBody>
+                    <CTable style={{fontSize: "clamp(0rem, 4vw, 1rem)"}} align="middle" className="bg-light mb-0" hover responsive>
+                        <CTableBody>
+                            <CTableRow v-for="item in tableItems">
+                                <CTableDataCell>
                                     <CFormTextarea
+                                        style={{fontSize: "clamp(0rem, 3vw, 1rem"}}
                                         type="text"
                                         label="Descricao"
                                         rows={5}
@@ -59,10 +64,12 @@ console.log(consideracao);
                                         }
                                         }
                                     />
-                            </CCol>
-                            <CCol style={varCol} className="mb-1" sm={12}>
+                                </CTableDataCell>
+                            </CTableRow>
+                            <CTableRow>
                                 <CTableDataCell>
                                     <CFormInput
+                                        style={{fontSize: "clamp(0rem, 3vw, 1rem"}}
                                         type="date"
                                         label="Mês Referencia"
                                         value={consideracao.mesReferenciaDate}
@@ -72,8 +79,9 @@ console.log(consideracao);
                                         }
                                     />
                                 </CTableDataCell>
-                            </CCol>
-                        </CRow>
+                            </CTableRow>
+                        </CTableBody>
+                    </CTable>
                     <CCard style={{border: "none",background: "transparent"}}>
                         <CTableDataCell>
                             <CButton
@@ -85,8 +93,9 @@ console.log(consideracao);
                         </CTableDataCell>
                     </CCard>
                 </CCardBody>
-            </CCard>
-        </CRow>
+            </CCol>
+        </Grid2>
+      </Grid2>
   )
 }
 

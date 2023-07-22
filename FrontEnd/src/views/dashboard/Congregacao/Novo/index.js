@@ -15,6 +15,7 @@ import {
 import api from "../../../../Api";
 import "../../../../styleNow.css";
 import {useNavigate} from "react-router-dom";
+import Grid2 from "@mui/material/Unstable_Grid2";
 
 const NovaCongregacao = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
@@ -33,11 +34,11 @@ const NovaCongregacao = () => {
   }
 
   return (
-        <CRow >
-            <CCol >
-                <CCard style={{border: "none",background: "transparent"}} className="align-items-center mb-4">
-                    <CCardBody style={{display: "contents"}}>
-                        <CTable align="middle" className="mb-0" hover responsive>
+        <Grid2 container style={{marginLeft: "0px", marginRight: "0px"}} item="true" textAlign="center" ml={6} mr={4.5} mb={4.5}>
+            <Grid2 xs={12} md={12}>
+                <CCol mb={-4}>
+                    <CCardBody>
+                        <CTable style={{fontSize: "clamp(0rem, 4vw, 1rem)"}} align="middle" className="bg-white mb-0" hover responsive>
                             <CTableHead color="light">
                                 <CTableRow>
                                     <CTableHeaderCell>NOME DA CONGREGAÇÃO</CTableHeaderCell>
@@ -62,9 +63,9 @@ const NovaCongregacao = () => {
                             </CButton>
                         </CCard>
                     </CCardBody>
-                </CCard>
-            </CCol>
-        </CRow>
+                </CCol>
+            </Grid2>
+        </Grid2>
   )
 }
 
