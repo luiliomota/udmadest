@@ -11,10 +11,12 @@ public class ContribuicaoDto {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Long id;
     private Long idCongregacao;
+    private Long idMesReferencia;
     private LocalDate dataRegistro;
     private LocalDate dataContribuicaoDate;
     private String dataContribuicaoString;
     private String nomeCongregacao;
+    private String mesReferenciaString;
     private BigDecimal carne;
     private BigDecimal oferta;
 
@@ -27,6 +29,10 @@ public class ContribuicaoDto {
         }
         this.idCongregacao = contribuicao.getCongregacao().getId();
         this.nomeCongregacao = contribuicao.getCongregacao().getNome();
+        if (contribuicao.getMesReferencia() != null) {
+            this.idMesReferencia = contribuicao.getMesReferencia().getId();
+            this.mesReferenciaString = contribuicao.getMesReferencia().getNome();
+        }
         this.carne = contribuicao.getCarne();
         this.oferta = contribuicao.getOferta();
     }
@@ -98,5 +104,21 @@ public class ContribuicaoDto {
 
     public void setIdCongregacao(Long idCongregacao) {
         this.idCongregacao = idCongregacao;
+    }
+
+    public Long getIdMesReferencia() {
+        return idMesReferencia;
+    }
+
+    public void setIdMesReferencia(Long idMesReferencia) {
+        this.idMesReferencia = idMesReferencia;
+    }
+
+    public String getMesReferenciaString() {
+        return mesReferenciaString;
+    }
+
+    public void setMesReferenciaString(String mesReferenciaString) {
+        this.mesReferenciaString = mesReferenciaString;
     }
 }

@@ -17,6 +17,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Autocomplete, TextField} from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import MediaQuery from "react-responsive";
+import congregacao from "../../Congregacao";
 
 const EditarContribuicao = () => {
     const {id} = useParams();
@@ -31,7 +32,7 @@ const EditarContribuicao = () => {
   });
 
     useEffect(() => {
-        api.get("/api/congregacao")
+        api.get("/api/congregacao?size=1000&sort=nome,asc")
             .then((response) => {
                 setListaCongregacoes(response.data.content);
             })
@@ -64,11 +65,10 @@ const EditarContribuicao = () => {
                       <MediaQuery minWidth={600}>
                           <CTable style={{fontSize: "clamp(0rem, 3vw, 1rem)"}} align="middle" className="bg-light mb-0" hover responsive>
                               <CTableBody>
-                                  <CTableRow>
-                                      <CTableDataCell className="w-25">
+                                  <CTableRow className="col-12">
+                                      <CTableDataCell className="col-5">
                                             <CFormInput type="hidden" label="Congregação"/>
                                             <Autocomplete
-                                                style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 className="bg-white"
                                                 value={contribuicao.idCongregacao}
                                                 options={listaCongregacoes}
@@ -77,7 +77,7 @@ const EditarContribuicao = () => {
                                                     const congregacao = listaCongregacoes.find(item => item.id === option);
                                                     return option ? (congregacao ? congregacao.nome : option.nome) : "";
                                                 }}
-                                                isOptionEqualToValue={(option, value) => option ? option.nome === value: false}
+                                                isOptionEqualToValue={(option, value) => option ? option.id === value: false}
                                                 onChange={(e, value) => {
                                                     setContribuicao({...contribuicao, idCongregacao: value.id});
                                                 }}
@@ -89,7 +89,7 @@ const EditarContribuicao = () => {
                                                 }
                                             />
                                       </CTableDataCell>
-                                      <CTableDataCell className="w-25">
+                                      <CTableDataCell className="col-3">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 type="date"
@@ -101,19 +101,19 @@ const EditarContribuicao = () => {
                                                 }
                                             />
                                       </CTableDataCell>
-                                      <CTableDataCell className="w-25">
+                                      <CTableDataCell className="col-2">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 label="Carnê"
                                                 type="text"
-                                                value={contribuicao.carne}
+                                                value={"R$ "+contribuicao.carne}
                                                 onChange={(e) => {
                                                     setContribuicao({...contribuicao, carne: e.target.value})
                                                 }
                                                 }
                                             />
                                       </CTableDataCell>
-                                      <CTableDataCell className="w-25">
+                                      <CTableDataCell className="col-2">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 label="Oferta"
@@ -132,11 +132,10 @@ const EditarContribuicao = () => {
                       <MediaQuery maxWidth={599}>
                           <CTable style={{fontSize: "clamp(0rem, 3vw, 1rem)"}} align="middle" className="bg-light mb-0" hover responsive>
                               <CTableBody>
-                                  <CTableRow>
-                                      <CTableDataCell className="w-50">
+                                  <CTableRow className="col-12">
+                                      <CTableDataCell className="col-8">
                                             <CFormInput type="hidden" label="Congregação"/>
                                             <Autocomplete
-                                                style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 className="bg-white"
                                                 value={contribuicao.idCongregacao}
                                                 options={listaCongregacoes}
@@ -145,7 +144,7 @@ const EditarContribuicao = () => {
                                                     const congregacao = listaCongregacoes.find(item => item.id === option);
                                                     return option ? (congregacao ? congregacao.nome : option.nome) : "";
                                                 }}
-                                                isOptionEqualToValue={(option, value) => option ? option.nome === value: false}
+                                                isOptionEqualToValue={(option, value) => option ? option.id === value: false}
                                                 onChange={(e, value) => {
                                                     setContribuicao({...contribuicao, idCongregacao: value.id});
                                                 }}
@@ -153,11 +152,12 @@ const EditarContribuicao = () => {
                                                     <TextField
                                                         {...params}
                                                         InputLabelProps={{shrink:true}}
+                                                        size={2}
                                                     />
                                                 }
                                             />
                                       </CTableDataCell>
-                                      <CTableDataCell className="w-50">
+                                      <CTableDataCell className="col-4">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 type="date"
@@ -170,8 +170,8 @@ const EditarContribuicao = () => {
                                             />
                                       </CTableDataCell>
                                   </CTableRow>
-                                  <CTableRow>
-                                      <CTableDataCell className="w-50">
+                                  <CTableRow className="col-12">
+                                      <CTableDataCell className="col-6">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 label="Carnê"
@@ -183,7 +183,7 @@ const EditarContribuicao = () => {
                                                 }
                                             />
                                       </CTableDataCell>
-                                      <CTableDataCell className="w-50">
+                                      <CTableDataCell className="col-6">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 label="Oferta"

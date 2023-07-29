@@ -8,9 +8,11 @@ public class Consideracao {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate dataRegistro = LocalDate.now();
+    private LocalDate dataConsideracao;
     @Column(length = 4000)
     private String descricao;
-    private LocalDate mesReferencia;
+    @ManyToOne
+    private MesReferencia mesReferencia;
 
     public Consideracao() {
     }
@@ -39,11 +41,19 @@ public class Consideracao {
         this.dataRegistro = dataRegistro;
     }
 
-    public LocalDate getMesReferencia() {
+    public LocalDate getDataConsideracao() {
+        return dataConsideracao;
+    }
+
+    public void setDataConsideracao(LocalDate dataConsideracao) {
+        this.dataConsideracao = dataConsideracao;
+    }
+
+    public MesReferencia getMesReferencia() {
         return mesReferencia;
     }
 
-    public void setMesReferencia(LocalDate mesReferencia) {
+    public void setMesReferencia(MesReferencia mesReferencia) {
         this.mesReferencia = mesReferencia;
     }
 }

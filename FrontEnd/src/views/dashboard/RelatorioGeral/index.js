@@ -26,6 +26,8 @@ import "../../../styleNow.css";
 import CIcon from "@coreui/icons-react";
 import {cilPrint} from "@coreui/icons";
 import MediaQuery from 'react-responsive';
+import {TableBody} from "@mui/material";
+import {red} from "@mui/material/colors";
 
 const RelatorioGeral = () => {
 
@@ -43,7 +45,8 @@ const RelatorioGeral = () => {
 
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
   const navigate = useNavigate();
-  const [tabela, setTabela] = useState([
+  const [tabelaPeriodo, setTabelaPeriodo] = useState([{}]);
+  const [tabelaContribuicao, setTabelaContribuicao] = useState([
       {
         nomeCongregacao: "",
         dataContribuicaoString: "",
@@ -53,7 +56,7 @@ const RelatorioGeral = () => {
       },
     ]
   );
-  const [tabelaFilter, setTabelaFilter] = useState([
+  const [tabelaContribuicaoFilter, setTabelaContribuicaoFilter] = useState([
     {
       nomeCongregacao: "",
       dataContribuicaoString: "",
@@ -61,20 +64,52 @@ const RelatorioGeral = () => {
       oferta: "",
       total: "",
     }
-  ])
+  ]);
+  const [consideracao, setConsideracao] = useState([
+    {
+      descricao: "",
+      idMesReferencia: 0,
+      mesReferenciaString: "",
+    }
+  ]);
+
+  const [filterConsideracao, setFilterConsideracao] = useState([
+    {
+      descricao: "",
+      idMesReferencia: 0,
+      mesReferenciaString: "",
+    }
+  ]);
 
   const [diretoria, setDiretoria] = useState([]);
   const [presidente, setPresidente] = useState({
     nome: "",
     cargo: "",
-  })
+  });
   const [diretor, setDiretor] = useState({
     nome: "",
     cargo: "",
-  })
+  });
 
   useEffect(() => {
-    api.get("/api/diretoria")
+      api.get("/api/mesReferencia?size=1000&sort=id,asc")
+          .then((response) => {
+              setTabelaPeriodo(response.data.content);
+          })
+          .catch((error) => console.error(error));
+  },[]);
+
+  useEffect(() => {
+      api.get("/api/consideracao?size=1000&sort=dataConsideracao,asc")
+          .then((response) => {
+              setConsideracao(response.data.content);
+              setFilterConsideracao(response.data.content);
+          })
+          .catch((error) => console.error(error));
+  },[]);
+
+  useEffect(() => {
+    api.get("/api/diretoria?size=1000")
       .then((response) => {
         setDiretoria(response.data.content);
         setPresidente(response.data.content.find((item) => item.cargo === "Presidente do campo"));
@@ -86,8 +121,8 @@ const RelatorioGeral = () => {
   useEffect (() => {
     api.get("/api/contribuicao?size=1000&sort=id,asc")
         .then((response) => {
-          setTabela(response.data.content);
-          setTabelaFilter(response.data.content);
+          setTabelaContribuicao(response.data.content);
+          setTabelaContribuicaoFilter(response.data.content);
         })
         .catch((error) => console.error(error));
   },[]);
@@ -95,12 +130,67 @@ const RelatorioGeral = () => {
   function atualizarTabela() {
     api.get("/api/contribuicao?size=1000&sort=id,asc")
         .then((response) => {
-          setTabela(response.data.content);
-          setTabelaFilter(response.data.content);
+          setTabelaContribuicao(response.data.content);
+          setTabelaContribuicaoFilter(response.data.content);
         })
   }
 
-  function filterTabela(data, startFilter, endFilter) {
+  function mes (month) {
+      switch (month) {
+          case 1:
+              return "Janeiro"
+          case 2:
+              return "Fevereiro"
+          case 3:
+              return "Março"
+          case 4:
+              return "Abril"
+          case 5:
+              return "Maio"
+          case 6:
+              return "Junho"
+          case 7:
+              return "Julho"
+          case 8:
+              return "Agosto"
+          case 9:
+              return "Setembro"
+          case 10:
+              return "Outubro"
+          case 11:
+              return "Novembro"
+          case 12:
+              return "Dezembro"
+          default:
+              return null
+      }
+  }
+
+  function filterConsideracaoTabel (data, startFilter, endFilter) {
+      let dayStart = startFilter.getDate();
+      let monthStart = startFilter.getMonth()+1;
+      let dayEnd = endFilter.getDate();
+      let monthEnd = endFilter.getMonth()+1;
+
+      if (dayStart < 10){
+          dayStart = ('0' + dayStart);
+      }
+      if (monthStart < 10){
+          monthStart = ('0' + monthStart);
+      }
+      if (dayEnd < 10) {
+          dayEnd = ('0' + dayEnd);
+      }
+      if (monthEnd < 10) {
+          monthEnd = ('0' + monthEnd);
+      }
+      let start = (startFilter.getFullYear()+"-"+monthStart+"-"+dayStart);
+      let end = (endFilter.getFullYear()+"-"+monthEnd+"-"+dayEnd);
+      let tab = data.filter(item => (item.dataConsideracao >= start && item.dataConsideracao <= end));
+      return tab;
+  }
+
+  function filterTabelaContribuicao(data, startFilter, endFilter) {
     let dayStart = startFilter.getDate();
     let monthStart = startFilter.getMonth()+1;
     let dayEnd = endFilter.getDate();
@@ -128,7 +218,7 @@ const RelatorioGeral = () => {
         <>
           <Grid2 container item="true" style={{textAlign:"center"}} spacing={2} ref={componentRef}>
             <Grid2 item="true" xl={6} lg={6} md={6} sm={6} xs={6}>
-              <DatePicker
+                <DatePicker
                     selectsRange={true}
                     startDate={startDate}
                     endDate={endDate}
@@ -143,7 +233,8 @@ const RelatorioGeral = () => {
                       if (update[1] != null) {
                         end = update[1];
                       }
-                      setTabelaFilter(filterTabela(tabela, new Date(start), new Date(end)));
+                      setTabelaContribuicaoFilter (filterTabelaContribuicao(tabelaContribuicao, new Date(start), new Date(end)));
+                      setFilterConsideracao (filterConsideracaoTabel(consideracao, new Date(start), new Date(end)));
                     }}
                     peekNextMonth
                     showMonthDropdown
@@ -190,7 +281,7 @@ const RelatorioGeral = () => {
                           <CCardTitle style={{fontSize: "clamp(2rem, 9vw, 5rem)", color: "#980708", fontWeight: "1000", marginTop: "-2px", marginBottom: "-7px"}}>
                               MISSÕES
                           </CCardTitle>
-                          <CCardTitle style={{fontSize: "clamp(0rem, 3vw, 1.3rem)", color: "#000", fontWeight: "1000", marginTop: "1px", marginBottom: "20px"}}>
+                          <CCardTitle style={{fontSize: "clamp(0rem, 3vw, 1.3rem)", color: "#000", fontWeight: "1000", marginTop: "1px", marginBottom: "0px"}}>
                               Se faz indo, orando e contribuindo
                           </CCardTitle>
                       </CCard>
@@ -225,7 +316,7 @@ const RelatorioGeral = () => {
                           <CCardTitle style={{fontSize: "clamp(2rem, 9vw, 5rem)", color: "#980708", fontWeight: "1000", marginTop: "-2px", marginBottom: "-7px"}}>
                               MISSÕES
                           </CCardTitle>
-                          <CCardTitle style={{fontSize: "clamp(0rem, 3vw, 1.3rem)", color: "#000", fontWeight: "1000", marginTop: "1px", marginBottom: "20px"}}>
+                          <CCardTitle style={{fontSize: "clamp(0rem, 3vw, 1.3rem)", color: "#000", fontWeight: "1000", marginTop: "1px", marginBottom: "0px"}}>
                               Se faz indo, orando e contribuindo
                           </CCardTitle>
                       </CCard>
@@ -237,42 +328,71 @@ const RelatorioGeral = () => {
                   </Grid2>
               </MediaQuery>
               <Grid2 className="logo_udmadest_fundo_table" xs={12} md={12} mt={3}>
-                <CCol mb={-4}>
-                    <CCardBody>
-                          <CTable style={{fontSize: "clamp(0rem, 2vw, 1rem"}} align="middle" className="mb-0" hover responsive>
-                            <CTableHead color="light">
-                              <CTableRow>
-                                <CTableHeaderCell>Congregação</CTableHeaderCell>
-                                <CTableHeaderCell>Data</CTableHeaderCell>
-                                <CTableHeaderCell>Carnê</CTableHeaderCell>
-                                <CTableHeaderCell>Oferta</CTableHeaderCell>
-                                <CTableHeaderCell>Total</CTableHeaderCell>
-                              </CTableRow>
-                            </CTableHead>
-                            <CTableBody>
-                              {tabelaFilter.map((item, index) => (
-                                  <CTableRow v-for="item in tableItems" key={index}>
-                                    <CTableDataCell>
-                                      <div>{item.nomeCongregacao}</div>
-                                    </CTableDataCell>
-                                    <CTableDataCell>
-                                      <div>{item.dataContribuicaoString}</div>
-                                    </CTableDataCell>
-                                    <CTableDataCell>
-                                      <div>{"R$ "+parseFloat(item.carne).toFixed(2).toString().replace(".",",")}</div>
-                                    </CTableDataCell>
-                                    <CTableDataCell>
-                                      <div>{"R$ "+parseFloat(item.oferta).toFixed(2).toString().replace(".",",")}</div>
-                                    </CTableDataCell>
-                                    <CTableDataCell style={{fontWeight: "bold"}}>
-                                      <div>{"R$ "+parseFloat(item.carne + item.oferta).toFixed(2).toString().replace(".",",")}</div>
-                                    </CTableDataCell>
-                                  </CTableRow>
-                              ))}
-                            </CTableBody>
-                          </CTable>
-                    </CCardBody>
-                </CCol>
+                    {tabelaPeriodo.map((periodo, index) => {
+                        if (filterConsideracao.filter((item) => item.idMesReferencia === periodo.id).length > 0 ||
+                            tabelaContribuicaoFilter.filter((item) => item.idMesReferencia === periodo.id).length > 0) {
+                            return (
+                                <CTable>
+                                    <CTable align="middle" className="mb-2" hover responsive>
+                                        <CTableHead>
+                                            <CTableRow color="primary" style={{fontSize: "clamp(0rem, 3vw, 1.5rem)"}}
+                                                       v-for="item in tableItems" key={index}>
+                                                <CTableHeaderCell>
+                                                    <div>{periodo.nome}</div>
+                                                </CTableHeaderCell>
+                                            </CTableRow>
+                                        </CTableHead>
+                                        <CTableBody>
+                                            {filterConsideracao.filter((itemFilter) => (itemFilter.idMesReferencia === periodo.id)).map((item, index) => (
+                                                <CTableRow style={{fontSize: "clamp(0rem, 2vw, 1.5rem)"}}
+                                                           v-for="item in tableItems" key={index}>
+                                                    <CTableDataCell>
+                                                        <div>{item.descricao}</div>
+                                                    </CTableDataCell>
+                                                </CTableRow>
+                                            ))}
+                                        </CTableBody>
+                                    </CTable>
+                                    <CTable align="middle" className="mb-5" hover responsive>
+                                        <CTableHead>
+                                            {tabelaContribuicaoFilter.filter((itemFilter) => (itemFilter.idMesReferencia === periodo.id)).length > 0 ?
+                                                <CTableRow style={{fontSize: "clamp(0rem, 2vw, 1.5rem)"}}
+                                                           v-for="item in tableItems" key={index}>
+                                                    <CTableHeaderCell>Congregação</CTableHeaderCell>
+                                                    <CTableHeaderCell>Data</CTableHeaderCell>
+                                                    <CTableHeaderCell>Carnê</CTableHeaderCell>
+                                                    <CTableHeaderCell>Oferta</CTableHeaderCell>
+                                                    <CTableHeaderCell>Total</CTableHeaderCell>
+                                                </CTableRow> : null
+                                            }
+                                        </CTableHead>
+                                        <CTableBody>
+                                            {tabelaContribuicaoFilter.filter((itemFilter) => (itemFilter.idMesReferencia === periodo.id)).map((item, index) => (
+                                                <CTableRow style={{fontSize: "clamp(0rem, 2vw, 1.5rem)"}}
+                                                           v-for="item in tableItems" key={index}>
+                                                    <CTableDataCell>
+                                                        <div>{item.nomeCongregacao}</div>
+                                                    </CTableDataCell>
+                                                    <CTableDataCell>
+                                                        <div>{item.dataContribuicaoString}</div>
+                                                    </CTableDataCell>
+                                                    <CTableDataCell>
+                                                        <div>{"R$ " + parseFloat(item.carne).toFixed(2).toString().replace(".", ",")}</div>
+                                                    </CTableDataCell>
+                                                    <CTableDataCell>
+                                                        <div>{"R$ " + parseFloat(item.oferta).toFixed(2).toString().replace(".", ",")}</div>
+                                                    </CTableDataCell>
+                                                    <CTableDataCell style={{fontWeight: "bold"}}>
+                                                        <div>{"R$ " + parseFloat(item.carne + item.oferta).toFixed(2).toString().replace(".", ",")}</div>
+                                                    </CTableDataCell>
+                                                </CTableRow>
+                                            ))}
+                                        </CTableBody>
+                                    </CTable>
+                                </CTable>
+                            )
+                        }
+                    })}
               </Grid2>
           </Grid2>
         </>

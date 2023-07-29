@@ -5,6 +5,7 @@ import com.alf5.udmadest.controller.form.ConsideracaoForm;
 import com.alf5.udmadest.controller.form.EditarConsideracao;
 import com.alf5.udmadest.model.Consideracao;
 import com.alf5.udmadest.repository.ConsideracaoRepository;
+import com.alf5.udmadest.repository.MesReferenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,11 +23,13 @@ public class ConsideracaoController {
 
     @Autowired
     private ConsideracaoRepository consideracaoRepository;
+    @Autowired
+    private MesReferenciaRepository mesReferenciaRepository;
 
     //Registrar Consideracao
     @PostMapping
     public ResponseEntity<ConsideracaoDto> registrarConsideracao(@RequestBody @Valid ConsideracaoForm form, UriComponentsBuilder uriComponentsBuilder) {
-        Consideracao consideracao = form.registrar(consideracaoRepository);
+        Consideracao consideracao = form.registrar(consideracaoRepository, mesReferenciaRepository);
         if(consideracao != null){
             consideracaoRepository.save(consideracao);
             URI uri = uriComponentsBuilder.path("/api/consideracao/{id}").buildAndExpand(consideracao.getId()).toUri();
@@ -68,7 +71,7 @@ public class ConsideracaoController {
     @Transactional
     public ResponseEntity<ConsideracaoDto> editarConsideracao(@PathVariable Long id, @RequestBody @Valid EditarConsideracao form) {
         if(consideracaoRepository.existsById(id)){
-            Consideracao consideracao = form.editar(id, consideracaoRepository);
+            Consideracao consideracao = form.editar(id, consideracaoRepository, mesReferenciaRepository);
             return ResponseEntity.ok(new ConsideracaoDto(consideracao));
         }
         return ResponseEntity.notFound().build();

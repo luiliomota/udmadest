@@ -17,12 +17,12 @@ import {useNavigate, useParams} from "react-router-dom";
 import Grid2 from "@mui/material/Unstable_Grid2";
 
 const EditarConsideracao = () => {
-    const {id} = useParams();
+  const {id} = useParams();
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
   const navivate = useNavigate();
-    const varCol = {
-        'textAlign': "-webkit-center",
-    }
+  const varCol = {
+      'textAlign': "-webkit-center",
+  }
   const [consideracao, setConsideracao] = useState({
   });
 
@@ -71,10 +71,10 @@ const EditarConsideracao = () => {
                                     <CFormInput
                                         style={{fontSize: "clamp(0rem, 3vw, 1rem"}}
                                         type="date"
-                                        label="Mês Referencia"
-                                        value={consideracao.mesReferenciaDate}
+                                        label="Data"
+                                        value={consideracao.dataConsideracao}
                                         onChange={(e) => {
-                                            setConsideracao({...consideracao, mesReferenciaDate: e.target.value})
+                                            setConsideracao({...consideracao, dataConsideracao: e.target.value})
                                         }
                                         }
                                     />

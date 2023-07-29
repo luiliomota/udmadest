@@ -7,22 +7,25 @@ import org.springframework.data.domain.Page;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class ConsideracaoDto {
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Long id;
     private LocalDate dataRegistro;
+    private LocalDate dataConsideracao;
     private String descricao;
-    private LocalDate mesReferenciaDate;
+    private Long idMesReferencia;
     private String mesReferenciaString;
 
     public ConsideracaoDto(Consideracao consideracao) {
         this.id = consideracao.getId();
         this.dataRegistro = consideracao.getDataRegistro();
+        this.dataConsideracao = consideracao.getDataConsideracao();
         this.descricao = consideracao.getDescricao();
         if(consideracao.getMesReferencia() != null){
-            this.mesReferenciaString = consideracao.getMesReferencia().format(formatter);
-            this.mesReferenciaDate = consideracao.getMesReferencia();
+            this.idMesReferencia = consideracao.getMesReferencia().getId();
+            this.mesReferenciaString = consideracao.getMesReferencia().getNome();
         }
     }
 
@@ -54,12 +57,12 @@ public class ConsideracaoDto {
         this.dataRegistro = dataRegistro;
     }
 
-    public LocalDate getMesReferenciaDate() {
-        return mesReferenciaDate;
+    public LocalDate getDataConsideracao() {
+        return dataConsideracao;
     }
 
-    public void setMesReferenciaDate(LocalDate mesReferenciaDate) {
-        this.mesReferenciaDate = mesReferenciaDate;
+    public void setDataConsideracao(LocalDate dataConsideracao) {
+        this.dataConsideracao = dataConsideracao;
     }
 
     public String getMesReferenciaString() {
@@ -68,5 +71,13 @@ public class ConsideracaoDto {
 
     public void setMesReferenciaString(String mesReferenciaString) {
         this.mesReferenciaString = mesReferenciaString;
+    }
+
+    public Long getIdMesReferencia() {
+        return idMesReferencia;
+    }
+
+    public void setIdMesReferencia(Long idMesReferencia) {
+        this.idMesReferencia = idMesReferencia;
     }
 }

@@ -24,3 +24,6 @@
     font-size: 0.875em;
     color: unset!important;
 }
+.css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root {
+    font-size: clamp(0rem, 2.5vw, 1rem)!important;
+}

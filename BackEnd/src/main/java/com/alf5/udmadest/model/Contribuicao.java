@@ -12,6 +12,8 @@ public class Contribuicao {
     private LocalDate dataContribuicao;
     @ManyToOne
     private Congregacao congregacao;
+    @ManyToOne
+    private MesReferencia mesReferencia;
     private BigDecimal carne;
     private BigDecimal oferta;
 
@@ -40,6 +42,14 @@ public class Contribuicao {
 
     public void setDataRegistro(LocalDate dataRegistro) {
         this.dataRegistro = dataRegistro;
+    }
+
+    public MesReferencia getMesReferencia() {
+        return mesReferencia;
+    }
+
+    public void setMesReferencia(MesReferencia mesReferencia) {
+        this.mesReferencia = mesReferencia;
     }
 
     public Congregacao getCongregacao() {

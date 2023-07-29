@@ -4,17 +4,17 @@ import {
     CButton,
     CCard,
     CCardBody,
-    CCol, CForm,
-    CFormInput, CFormText,
+    CCol,
+    CFormInput,
     CFormTextarea,
-    CRow, CTable,
+    CTable,
     CTableBody,
-    CTableDataCell, CTableRow,
+    CTableDataCell,
+    CTableRow,
 } from '@coreui/react'
 import api from "../../../../Api";
 import "../../../../styleNow.css";
 import {useNavigate} from "react-router-dom";
-import {TextField} from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
 
 const NovaConsideracao = () => {
@@ -25,7 +25,7 @@ const NovaConsideracao = () => {
   }
   const [consideracao, setConsideracao] = useState({
       descricao: "",
-      mesReferencia: "",
+      dataConsideracao: "",
   });
 
     function cadastrar() {
@@ -65,9 +65,9 @@ const NovaConsideracao = () => {
                                             style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                             type="date"
                                             label="Data"
-                                            value={consideracao.mesReferencia}
+                                            value={consideracao.dataConsideracao}
                                             onChange={(e) => {
-                                                setConsideracao({...consideracao, mesReferencia: e.target.value})
+                                                setConsideracao({...consideracao, dataConsideracao: e.target.value})
                                               }
                                             }
                                         />

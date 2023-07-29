@@ -66,8 +66,8 @@ const NovaContribuicao = () => {
                       <MediaQuery minWidth={600}>
                           <CTable style={{fontSize: "clamp(0rem, 2vw, 1rem"}} align="middle" className="bg-light mb-0" hover responsive>
                               <CTableBody>
-                                  <CTableRow>
-                                      <CTableDataCell className="w-25">
+                                  <CTableRow className="col-12">
+                                      <CTableDataCell className="col-5">
                                             <CFormInput type="hidden" label="Congregação"/>
                                             <Autocomplete
                                                 className="bg-white"
@@ -89,7 +89,7 @@ const NovaContribuicao = () => {
                                                 }
                                             />
                                       </CTableDataCell>
-                                      <CTableDataCell className="w-25">
+                                      <CTableDataCell className="col-3">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 type="date"
@@ -101,7 +101,7 @@ const NovaContribuicao = () => {
                                                 }
                                             />
                                       </CTableDataCell>
-                                      <CTableDataCell className="w-25">
+                                      <CTableDataCell className="col-2">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 label="Carnê"
@@ -113,7 +113,7 @@ const NovaContribuicao = () => {
                                                 }
                                             />
                                       </CTableDataCell>
-                                      <CTableDataCell className="w-25">
+                                      <CTableDataCell className="col-2">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 label="Oferta"
@@ -132,8 +132,8 @@ const NovaContribuicao = () => {
                       <MediaQuery maxWidth={599}>
                           <CTable style={{fontSize: "clamp(0rem, 3vw, 1rem)"}} align="middle" className="bg-light mb-0" hover responsive>
                               <CTableBody>
-                                  <CTableRow>
-                                      <CTableDataCell className="w-50">
+                                  <CTableRow className="col-12">
+                                      <CTableDataCell className="col-8">
                                             <CFormInput type="hidden" label="Congregação"/>
                                             <Autocomplete
                                                 className="bg-white"
@@ -156,7 +156,7 @@ const NovaContribuicao = () => {
                                                 }
                                             />
                                       </CTableDataCell>
-                                      <CTableDataCell className="w-50">
+                                      <CTableDataCell className="col-4">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 type="date"
@@ -169,8 +169,8 @@ const NovaContribuicao = () => {
                                             />
                                       </CTableDataCell>
                                   </CTableRow>
-                                  <CTableRow>
-                                      <CTableDataCell className="w-50">
+                                  <CTableRow className="col-12">
+                                      <CTableDataCell className="col-6">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 label="Carnê"
@@ -182,7 +182,7 @@ const NovaContribuicao = () => {
                                                 }
                                             />
                                       </CTableDataCell>
-                                      <CTableDataCell className="w-50">
+                                      <CTableDataCell className="col-6">
                                             <CFormInput
                                                 style={{fontSize: "clamp(0rem, 3vw, 1rem)"}}
                                                 label="Oferta"

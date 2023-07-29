@@ -31,7 +31,7 @@ const RelatorioContribuicao = () => {
   )
 
   useEffect (() => {
-    api.get("/api/contribuicao")
+    api.get("/api/contribuicao?size=1000&sort=id,desc")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -39,7 +39,7 @@ const RelatorioContribuicao = () => {
   },[]);
 
   function atualizarTabela() {
-    api.get("/api/contribuicao")
+    api.get("/api/contribuicao?size=1000&sort=id,desc")
         .then((response) => {
           setTabela(response.data.content);
         })

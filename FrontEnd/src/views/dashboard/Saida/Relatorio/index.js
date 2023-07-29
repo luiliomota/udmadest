@@ -29,7 +29,7 @@ const RelatorioSaida = () => {
   )
 
   useEffect (() => {
-    api.get("/api/saida")
+    api.get("/api/saida?size=1000&sort=id,desc")
         .then((response) => {
           setTabela(response.data.content);
         })
@@ -37,7 +37,7 @@ const RelatorioSaida = () => {
   },[]);
 
   function atualizarTabela() {
-    api.get("/api/saida")
+    api.get("/api/saida?size=1000&sort=id,desc")
         .then((response) => {
           setTabela(response.data.content);
         })
