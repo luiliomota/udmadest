@@ -14,7 +14,7 @@ install_dependency-build:
     - apk update
     - apk add npm 
     - apk add maven
-    - cd frontend/
+    - cd FrontEnd/
     - echo "Atualização de pacotes npm..."
     - npm install
     - echo "Iniciando Build do FrontEnd..."
