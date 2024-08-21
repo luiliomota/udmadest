@@ -25,7 +25,7 @@ install_dependency-build:
 
   artifacts:
     paths:
-      - target/*.jar
+      - BackEnd/target/*.jar
   only:
     - develop
 
